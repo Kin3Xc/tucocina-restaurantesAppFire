@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', []);
+var app = angular.module('tucocinaApp.controllers', ['LocalStorageModule']);
 
 app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -41,9 +41,57 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   };
 });
 
-app.controller('PlaylistsCtrl', function($scope) {
+// CONTROLADORES DE LA APP
 
-});
+// controlador para la vista home, encargada de recoger el código del restaurante
+app.controller('HomeCtrl', function($scope, localStorageService, $location) {
 
-app.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+  // almaceno el código del restaurante en el local storage
+  $scope.saveCodigoRestaurante = function(codigo){
+    if (codigo != null) {
+      localStorageService.set('codigoRestaurante', codigo);
+      $location.url('/mesa');
+    }else{
+      $scope.respuesta_codigo = 'Ingrese el código del restaurante';
+    }
+  }; // fin saveCodigoRestaurante
+  
+});// fin HomeCtrl
+
+
+
+// controlador para capturar el numero de la mesa y alamcenarlo en el local storage para su posterior uso
+app.controller('MesaCtrl', function($scope, localStorageService, $location){
+
+  // función para almacenar el numero de la mesa en el local storage
+  $scope.mesaRestaurante = function(numMesa){
+    if (numMesa != null) {
+      localStorageService.set('numMesa', numMesa);
+    }else{
+      $scope.respuesta_mesa = 'Ingrese el numero de su mesa';
+    }
+  };// fin mesaRestaurante
+
+});// fin MesaCtrl
+
+
+
+
+// controlar para cargar las categorias del menu
+app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_categorias){
+
+  // cargo todas las categorias al $scope para poder mostrarlas en la vista
+  $scope.categorias = Menu_categorias;
+
+  // función para guardar el id de la categoria seleccionada
+  $scope.categoria_seleccionada = function(idCategoria){
+    if (idCategoria != null) {
+      localStorageService.set('idCategoria', idCategoria);
+    }
+  };// fin categoria_seleccionada
+
+});// fin CategoriasCtrl
+
+
+
+
