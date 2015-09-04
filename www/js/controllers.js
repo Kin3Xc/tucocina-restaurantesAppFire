@@ -1,5 +1,9 @@
 var app = angular.module('starter.controllers', []);
 
+
+
+
+
 app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -41,9 +45,39 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   };
 });
 
-app.controller('PlaylistsCtrl', function($scope) {
+
+app.controller('pruebaHomeCtrl', function($scope, $location){
+  
+  $scope.pin = '';
+         
+  $scope.aMesa = function(){
+     console.log($scope.pin);
+
+    // // nos vamos a al siguiente estado
+    $location.url('/app/mesa');
+  }
 
 });
 
-app.controller('PlaylistCtrl', function($scope, $stateParams) {
+
+
+
+
+app.controller('pruebaMesaCtrl', function($scope, $location){
+  $scope.mesa = '';
+
+  $scope.aMenuPrincipal = function(){
+    console.log($scope.mesa);
+
+    //nos vamos al estado menuPrincipal 
+    $location.url('/app/menuPrincipal');
+  }
+
 });
+
+
+app.controller('pruebaMenuPrincipalCtrl', function($scope, $location){
+
+});
+
+

@@ -1,8 +1,30 @@
 
 
 <ion-view view-title="Tu Cocina Virtual">
-  <ion-content>
-    <h1> codigo de restaurante</h1>
-	
-  </ion-content>
+
+<div class="row col col-100">
+	  <ion-content class="center" ng-controller="pruebaHomeCtrl">
+		<div class="center">
+		<img src="img/icono-tucocina.png" alt="" class="center">
+		</div>
+		<h1 style="font-size:24px; margin-bottom:40px;" class="center">A un clic de tu Mesero</h1>
+
+	    
+			<div class="">
+			  <label class="item item-input block">
+			   
+			    <input ng-model="pin" style="text-align:center" type="tel" placeholder="PIN del Restaurante">
+			  </label>
+			
+			  <button ng-click="aMesa()" class="button button-block button-dark">
+			  	  Entrar
+		      </button>
+		<p class="center" style="margin-top:30px;"> Aplicación para Restaurantes </p>
+			</div>
+
+			
+
+			<br><br>	
+	  </ion-content>
+  </div>
 </ion-view>

@@ -1,1 +1,121 @@
 /* Empty. Add your own CSS if you like */
+
+/*para centrar en la mitad boton*/
+.center{
+  display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+
+
+/*centra placeholder*/
+::-webkit-input-placeholder {
+ font-size: 14px;
+ color: #d0cdfa;
+ text-transform: uppercase;
+ text-transform: uppercase;
+ text-align: center;
+ font-weight: bold;
+}
+:-moz-placeholder { /* older Firefox*/
+ font-size:14px;
+ color: #d0cdfa;
+ text-transform: uppercase;
+ text-align: center;
+ font-weight: bold;
+}
+::-moz-placeholder { /* Firefox 19+ */ 
+ font-size: 14px;
+ color: #d0cdfa; 
+ text-transform: uppercase;
+ text-align: center;
+ font-weight: bold;
+} 
+:-ms-input-placeholder { 
+ font-size: 14px; 
+ color: #d0cdfa;
+ text-transform: uppercase;
+ text-align: center;
+ font-weight: bold;
+}
+
+
+/* agrega fuentes */
+body{font-family: 'Varela Round', sans-serif;}
+
+h1{font-family: 'Varela Round', sans-serif;}
+
+.menu-pagina-menuPrincipal{
+	background: lightgrey;
+	text-decoration: none; 
+    color: white;
+    text-align: center; 
+    height: 80px;
+    border:.9px white solid;
+}
+.menu-pagina-menuPrincipal-blanco{
+	background: white;
+	text-decoration: none; 
+    color: grey;
+    text-align: center;
+    height: 80px;
+   /* border:1px #bdc3c7 solid;*/
+}
+
+.agrandoIcono {
+    font-size: 2.5em;
+}
+
+.agrandoLetra {
+    font-size: 1.1em !important;
+}
+
+.aSinLinea{
+	text-decoration:none;
+}
+
+.no-padding{
+	padding:0px;
+}
+
+.bordes-abajo{
+	border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.border-izquierda{
+	border-top-left-radius:10px;
+}
+.border-derecha{
+	border-top-right-radius: 10px;
+}
+
+.bar.bar-energized{
+	background-color: #FED136;
+}
