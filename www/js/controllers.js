@@ -64,7 +64,8 @@ app.controller('pruebaHomeCtrl', function($scope, $location){
 app.controller('HomeCtrl', function($scope, localStorageService, $location) {
 
   // almaceno el código del restaurante en el local storage
-  $scope.saveCodigoRestaurante = function(codigo){
+  $scope.saveCodigoRestaurante = function(){
+    var codigo = $scope.pin;
     if (codigo != null) {
       localStorageService.set('codigoRestaurante', codigo);
       $location.url('/mesa');
@@ -76,12 +77,12 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location) {
 });// fin HomeCtrl
 
 
-
 // controlador para capturar el numero de la mesa y alamcenarlo en el local storage para su posterior uso
 app.controller('MesaCtrl', function($scope, localStorageService, $location){
 
   // función para almacenar el numero de la mesa en el local storage
-  $scope.mesaRestaurante = function(numMesa){
+  $scope.mesaRestaurante = function(){
+    var numMesa = $scope.
     if (numMesa != null) {
       localStorageService.set('numMesa', numMesa);
     }else{
@@ -109,22 +110,4 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 
 });// fin CategoriasCtrl
 
-
-
-app.controller('pruebaMesaCtrl', function($scope, $location){
-  $scope.mesa = '';
-
-  $scope.aMenuPrincipal = function(){
-    console.log($scope.mesa);
-
-    //nos vamos al estado menuPrincipal 
-    $location.url('/app/menuPrincipal');
-  }
-
-});
-
-
-app.controller('pruebaMenuPrincipalCtrl', function($scope, $location){
-
-});
 
