@@ -51,16 +51,14 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
 // controlador para la vista home, encargada de recoger el código del restaurante
 app.controller('HomeCtrl', function($scope, localStorageService, $location) {
-  $scope.pin = null;
+  //$scope.pin = 0;
   // almaceno el código del restaurante en el local storage
   $scope.saveCodigoRestaurante = function(){
-
-    var codigo = $scope.pin;
 
     var codigo = parseInt($scope.pin);
     console.log(codigo);
 
-    if (codigo != null) {
+    if (codigo != 0) {
       localStorageService.set('codigoRestaurante', codigo);
       $location.url('/app/mesa');
     }else{
@@ -74,16 +72,14 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location) {
 // controlador para capturar el numero de la mesa y alamcenarlo en el local storage para su posterior uso
 app.controller('MesaCtrl', function($scope, localStorageService, $location){
 
-  $scope.mesa = null;
+  //$scope.mesa = 0;
   // función para almacenar el numero de la mesa en el local storage
   $scope.mesaRestaurante = function(){
-
-    var numMesa = $scope.
 
     var numMesa = parseInt($scope.mesa);
     console.log(numMesa);
 
-    if (numMesa != null) {
+    if (numMesa != 0) {
       localStorageService.set('numMesa', numMesa);
       //nos vamos al estado menuPrincipal 
       $location.url('/app/menuPrincipal');
@@ -122,8 +118,30 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias)
   }
 });
 
-app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias){
-  
+app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService){
   $scope.categorias = Menu_categorias;
+
+  $scope.verPlatos = function(idCategoria){
+    console.log('Id Categoria: ' + idCategoria);
+
+    localStorageService.set('idCategoria', idCategoria);
+    $location.url('/app/platos');
+  };
+
 });
 
+
+
+app.controller('PlatosCtrl', function($scope, $location, localStorageService){
+  var id = localStorageService.get('idCategoria');
+
+  var count = 0;
+  var listPlatos = [];
+
+  var platos = new Firebase("https://tucocina.firebaseio.com/platos/");
+  platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
+    count++;
+    listPlatos[count] = plato.val();
+    $scope.platos = listPlatos.filter(Boolean);
+  });
+});

@@ -72,6 +72,17 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
       }
     }
   })
+
+   .state('app.platos', {
+    url: '/platos', 
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/platos.html',
+        controller: 'PlatosCtrl'
+      }
+    }
+  });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
