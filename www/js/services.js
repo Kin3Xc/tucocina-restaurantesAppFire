@@ -27,5 +27,4 @@ app.factory("PlatosIdCategoria", function($firebaseArray, localStorageService) {
 	}
 });
 
-var list = $firebaseArray(ref);
-var rec = list.$getRecord("foo"); // record with $id === "foo" or null
+

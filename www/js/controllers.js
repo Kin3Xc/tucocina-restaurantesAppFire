@@ -46,28 +46,19 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 });
 
 
-app.controller('pruebaHomeCtrl', function($scope, $location){
-  
-  $scope.pin = '';
-         
-  $scope.aMesa = function(){
-     console.log($scope.pin);
-
-    // // nos vamos a al siguiente estado
-    $location.url('/app/mesa');
-  } 
-});
 
 // CONTROLADORES DE LA APP
 
 // controlador para la vista home, encargada de recoger el código del restaurante
 app.controller('HomeCtrl', function($scope, localStorageService, $location) {
-
+  $scope.pin = null;
   // almaceno el código del restaurante en el local storage
-  $scope.saveCodigoRestaurante = function(codigo){
+  $scope.saveCodigoRestaurante = function(){
+    var codigo = parseInt($scope.pin);
+    console.log(codigo);
     if (codigo != null) {
       localStorageService.set('codigoRestaurante', codigo);
-      $location.url('/mesa');
+      $location.url('/app/mesa');
     }else{
       $scope.respuesta_codigo = 'Ingrese el código del restaurante';
     }
@@ -80,14 +71,20 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location) {
 // controlador para capturar el numero de la mesa y alamcenarlo en el local storage para su posterior uso
 app.controller('MesaCtrl', function($scope, localStorageService, $location){
 
+  $scope.mesa = null;
   // función para almacenar el numero de la mesa en el local storage
-  $scope.mesaRestaurante = function(numMesa){
+  $scope.mesaRestaurante = function(){
+    var numMesa = parseInt($scope.mesa);
+    console.log(numMesa);
     if (numMesa != null) {
       localStorageService.set('numMesa', numMesa);
+      //nos vamos al estado menuPrincipal 
+      $location.url('/app/menuPrincipal');
     }else{
       $scope.respuesta_mesa = 'Ingrese el numero de su mesa';
     }
   };// fin mesaRestaurante
+  
 
 });// fin MesaCtrl
 
@@ -111,20 +108,16 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 
 
 
-app.controller('pruebaMesaCtrl', function($scope, $location){
-  $scope.mesa = '';
 
-  $scope.aMenuPrincipal = function(){
-    console.log($scope.mesa);
 
-    //nos vamos al estado menuPrincipal 
-    $location.url('/app/menuPrincipal');
+app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias){
+  $scope.verMenu = function(){
+    $location.url('/app/menuCategorias');
+    console.log(Menu_categorias);
   }
-
 });
 
-
-app.controller('pruebaMenuPrincipalCtrl', function($scope, $location){
-
+app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias){
+  
+  $scope.categorias = Menu_categorias;
 });
-
