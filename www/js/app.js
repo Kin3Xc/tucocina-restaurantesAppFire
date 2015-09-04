@@ -37,7 +37,7 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
     views: {
       'menuContent': {
         templateUrl: 'templates/home.html',
-        controller: 'pruebaHomeCtrl'
+        controller: 'HomeCtrl'
       }
     }
   })
@@ -47,7 +47,7 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
     views: {
       'menuContent': {
         templateUrl: 'templates/mesa.html',
-        controller: 'pruebaMesaCtrl'
+        controller: 'MesaCtrl'
       }
     }
   })
@@ -58,47 +58,20 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
     views: {
       'menuContent': {
         templateUrl:'templates/menu-principal.html',
-        controller: 'pruebaMenuPrincipalCtrl'
+        controller: 'MenuPrincipalCtrl'
       }
     }
-  });
+  })
 
-  // .state('app.search', {
-  //   url: '/search',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/search.html'
-  //     }
-  //   }
-  // })
-
-  // .state('app.browse', {
-  //     url: '/browse',
-  //     views: {
-  //       'menuContent': {
-  //         templateUrl: 'templates/browse.html'
-  //       }
-  //     }
-  //   })
-    // .state('app.playlists', {
-    //   url: '/playlists',
-    //   views: {
-    //     'menuContent': {
-    //       templateUrl: 'templates/playlists.html',
-    //       controller: 'PlaylistsCtrl'
-    //     }
-    //   }
-    // })
-
-  // .state('app.single', {
-  //   url: '/playlists/:playlistId',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/playlist.html',
-  //       controller: 'PlaylistCtrl'
-  //     }
-  //   }
-  // });
+  .state('app.menuCategorias', {
+    url: '/menuCategorias', 
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/menu-categorias.html',
+        controller: 'MenuCategoriasCtrl'
+      }
+    }
+  })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
