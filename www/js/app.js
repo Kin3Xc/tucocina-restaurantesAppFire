@@ -81,6 +81,26 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
         controller: 'PlatosCtrl'
       }
     }
+  })
+
+  .state('app.platoSeleccionado', {
+    url: '/platoSeleccionado', 
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/platoSeleccionado.html',
+        controller: 'platoSeleccionadoCtrl'
+      }
+    }
+  })
+
+  .state('app.resumen', {
+    url: '/resumen', 
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/resumen.html',
+        controller: 'platoSeleccionadoCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
