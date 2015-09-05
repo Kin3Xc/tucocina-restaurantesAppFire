@@ -13,18 +13,5 @@ app.factory("Platos", function($firebaseArray) {
 	return $firebaseArray(platos);
 });
 
-// traigo un plato por si ID
-app.factory("PlatosIdCategoria", function($firebaseArray, localStorageService) {
-	var idPlatoCategoria = localStorageService.get('idCategoria');
-	// valido que exista un plato seleccionado
-	if (idPlatoCategoria != null) {
-		var platosCategoria = new Firebase("https://tucocina.firebaseio.com/platos/");
-		var list = $firebaseArray(platosCategoria);
-		var platosCategoria = list.$getRecord('idPlatoCategoria');
-		return platosCategoria;
-	}else{
-		return $firebaseArray({platosCategoria: 'null'});
-	}
-});
 
 
