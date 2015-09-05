@@ -72,8 +72,21 @@ body{font-family: 'Varela Round', sans-serif;}
 h1{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuPrincipal{
-	background: lightgrey;
+	background: lightgrey ;
 	text-decoration: none; 
+    color: grey;
+    text-align: center; 
+    height: 80px;
+    border:.9px white solid;
+    border-radius: 8px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+}
+
+
+.menu-pagina-menuPrincipal:hover{
+    background: grey;
+    text-decoration: none; 
     color: white;
     text-align: center; 
     height: 80px;
@@ -82,21 +95,14 @@ h1{font-family: 'Varela Round', sans-serif;}
     margin-left: 2px;
     margin-bottom: 2px;
 }
-.menu-pagina-menuPrincipal-blanco{
-	background: white;
-	text-decoration: none; 
-    color: grey;
-    text-align: center;
-    height: 80px;
-   /* border:1px #bdc3c7 solid;*/
-}
 
 .agrandoIcono {
-    font-size: 2.5em;
+    font-size: 2.8em;
+    color:white;
 }
 
 .agrandoLetra {
-    font-size: 1.1em !important;
+    font-size: 1.3em !important;
 }
 
 .aSinLinea{
