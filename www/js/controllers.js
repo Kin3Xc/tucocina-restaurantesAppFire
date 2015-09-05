@@ -142,6 +142,105 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService){
   platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
     count++;
     listPlatos[count] = plato.val();
+    listPlatos[count].$id = plato.key();
     $scope.platos = listPlatos.filter(Boolean);
+    console.log('Listado de platos');
+    console.log($scope.platos);
   });
+
+
+  //funcion para mostrara la visata y la info del plato seleccionado por el usuario
+  $scope.pedirPlato = function(idPlato){
+    console.log('ID Plato Seleccionado: '+ idPlato);
+    localStorageService.set('idPlato', idPlato);
+
+    $location.url('/app/platoSeleccionado');
+  };
+});
+
+
+app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorageService, Pedidos){
+  var id = localStorageService.get('idPlato');
+
+  var plato = new Firebase("https://tucocina.firebaseio.com/platos/"+id).once('value', function(data){
+    $scope.platoSelect = data.val();
+    console.log('Plato: '+$scope.platoSelect);
+  });
+
+  //ingredientes
+  var count = 0;
+  var ingredientes = [];
+
+  var ingre = new Firebase("https://tucocina.firebaseio.com/ingredientes/");
+  ingre.orderByChild("idPlato").equalTo(id).on("child_added", function(ingrediente) {
+    count++;
+    ingredientes[count] = ingrediente.val();
+    ingredientes[count].$id = ingrediente.key();
+    $scope.ingredientesPlato = ingredientes.filter(Boolean);
+    console.log('Listado de ingredientes');
+    console.log($scope.ingredientesPlato);
+  });
+
+  // adicionales
+  var count = 0;
+  var adicionales = [];
+
+  var adi = new Firebase("https://tucocina.firebaseio.com/adicionales/");
+  adi.orderByChild("idPlato").equalTo(id).on("child_added", function(adicional) {
+    count++;
+    adicionales[count] = adicional.val();
+    adicionales[count].$id = adicional.key();
+    $scope.adicionalesPlato = adicionales.filter(Boolean);
+    console.log('Listado de adicionales');
+    console.log($scope.adicionalesPlato);
+  });
+
+
+
+  //regresa los pedidos de una sola mesa
+  var count = 0;
+  var mesaActual = [];
+
+  var numMesa = localStorageService.get('numMesa');
+  var miMesa = new Firebase("https://tucocina.firebaseio.com/pedidos/");
+  miMesa.orderByChild("mesa").equalTo(numMesa).on("child_added", function(mesa) {
+    count++;
+    mesaActual[count] = mesa.val();
+    console.log(mesaActual);
+    // mesaActual[count].$id = mesa.key();
+    $scope.pedidosMesa = mesaActual.filter(Boolean);
+    console.log('Listado de platos de la mesa');
+    console.log($scope.pedidosMesa);
+  });
+
+
+
+  // función para enviar el pedido, despúes de esto el pedido llegará al mesero
+  // luego de confirmar el envío se le redireccionará al resumen desde donde podrá realizar 
+  // un nuevo pedido que quedará asignado a la mesa actual
+  $scope.enviarPedido = function(){
+    var mesa = localStorageService.get('numMesa');
+
+    var pedido = {
+      mesa: mesa,
+      plato: $scope.platoSelect.nombrePlato,
+      precio: $scope.platoSelect.valor,
+      estado: 'en proceso',
+      ingredientes: [$scope.ingredientesPlato],
+      adicionales: [$scope.adicionalesPlato]
+    };
+
+    Pedidos.$add(pedido);
+
+    $location.url('app/resumen');
+
+  };
+
+
+  // función para realizar un nuevo pedido en la mesa actual
+  $scope.otroPedido = function(){
+    $location.url('/app/menuCategorias');
+  };
+
+
 });

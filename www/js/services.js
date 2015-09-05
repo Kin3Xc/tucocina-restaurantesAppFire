@@ -13,5 +13,11 @@ app.factory("Platos", function($firebaseArray) {
 	return $firebaseArray(platos);
 });
 
+// gestionar pedidos
+app.factory("Pedidos", function($firebaseArray) {
+	var pedidos = new Firebase("https://tucocina.firebaseio.com/pedidos");
+	return $firebaseArray(pedidos);
+});
+
 
 
