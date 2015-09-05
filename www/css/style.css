@@ -78,6 +78,9 @@ h1{font-family: 'Varela Round', sans-serif;}
     text-align: center; 
     height: 80px;
     border:.9px white solid;
+    border-radius: 8px;
+    margin-left: 2px;
+    margin-bottom: 2px;
 }
 .menu-pagina-menuPrincipal-blanco{
 	background: white;
@@ -105,8 +108,10 @@ h1{font-family: 'Varela Round', sans-serif;}
 }
 
 .bordes-abajo{
-	border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+	    margin-top: 4px;
+    /* border-bottom-left-radius: 20px; */
+    /* border-bottom-right-radius: 7px; */
+    border-radius: 13px;
 }
 
 .border-izquierda{
@@ -114,8 +119,31 @@ h1{font-family: 'Varela Round', sans-serif;}
 }
 .border-derecha{
 	border-top-right-radius: 10px;
+    border-radius: 8px;
+    margin-left: 2px;
+    margin-bottom: 2px;
 }
 
 .bar.bar-energized{
-	background-color: #FED136;
+	background-color:#FEC503 ;
+}
+
+.bar.bar-stable .title {
+    color: white;
+ /*   background-color: #FED136;*/
+    font-size: 1.6em;
+}
+
+.paddingTopOcho{
+    padding-top:8px;
+}
+
+div.title.title-center.header-item{ font-size: 1.5em; }
+
+
+.cubreAlmenuPrincipal{
+    padding:4px;
+    border: 4px solid lightgrey;
+    border-radius: 15px;
+    background-color: whitesmoke;
 }
