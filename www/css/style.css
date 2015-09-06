@@ -80,7 +80,7 @@ h1{font-family: 'Varela Round', sans-serif;}
     border:.9px white solid;
     border-radius: 8px;
     margin-left: 2px;
-    margin-bottom: 2px;
+    margin-bottom: 6px;
 }
 
 
@@ -95,6 +95,54 @@ h1{font-family: 'Varela Round', sans-serif;}
     margin-left: 2px;
     margin-bottom: 2px;
 }
+
+.promociones, .pedir-cuenta{
+    margin-left:5px;
+}
+
+.menu-pagina-menuCategorias{
+    background: lightgrey ;
+    text-decoration: none; 
+    color: grey;
+    text-align: center; 
+    height: 80px;
+    border:.9px white solid;
+    border-radius: 8px;
+    margin-left: 2px;
+    margin-bottom: 6px;
+     border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size:12px;
+}
+
+.menu-pagina-menuCategorias:hover{
+    background: white ;
+    text-decoration: none; 
+    color: grey;
+    text-align: center; 
+    height: 80px;
+    border:.9px white solid;
+    border-radius: 8px;
+    margin-left: 2px;
+    margin-bottom: 6px;
+}
+
+.menu-pagina-menuCategoriasBlanco{
+    background: white ;
+    text-decoration: none; 
+    color: grey;
+    text-align: center; 
+    height: 80px;
+    border:2.5px lightgrey solid;
+    border-radius: 8px;
+    
+    margin-bottom: 6px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+
+
 
 .agrandoIcono {
     font-size: 2.8em;
@@ -123,11 +171,16 @@ h1{font-family: 'Varela Round', sans-serif;}
 .border-izquierda{
 	border-top-left-radius:10px;
 }
-.border-derecha{
+/*.border-derecha{
 	border-top-right-radius: 10px;
     border-radius: 8px;
     margin-left: 2px;
     margin-bottom: 2px;
+}*/
+
+.cubreCategorias{
+    background:whitesmoke;
+    padding:4px;
 }
 
 .bar.bar-energized{
@@ -153,3 +206,49 @@ div.title.title-center.header-item{ font-size: 1.5em; }
     border-radius: 15px;
     background-color: whitesmoke;
 }
+
+
+.bar .button.button-icon .icon:before, .bar .button.button-icon:before, .bar .button.button-icon.icon-left:before, .bar .button.button-icon.icon-right:before {
+    vertical-align: top;
+    font-size: 50px;
+    line-height: 32px;
+}
+
+
+/* home.html */
+.tag-line{
+    font-size:24px;
+    margin-bottom:23px;
+}
+
+.centrado{
+    text-align:center;
+}
+
+.designInputButton{
+   border-radius:10px;
+}
+
+.taglineAppPaRestaurantes{
+    margin-top:20px;
+}
+
+/* comienza mesa.html */
+
+
+
+/* comienza menu-principal */
+.contieneLogoRestaurante{
+    border:2px solid white;
+}
+.separaPedirCuentaIconos{
+    margin-right:5px;
+}
+                                          
+
+
+/* comienza menu-categorias.html */
+
+
+
+

@@ -1,17 +1,4 @@
 <ion-view view-title="Tu Cocina Virtual" left-buttons="leftButtons" right-buttons="rightButtons">
-  <ion-slide-box does-continue="true" slide-interval="1000" on-slide-changed="slideChanged(index)">
-    <ion-slide>
-      <div class="promo">
-        <h1>Promo 1</h1>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div class="promo">
-        <h1>Promo 2</h1>
-      </div>
-    </ion-slide>
-  </ion-slide-box>
 
  <ion-content class="content-home" ng-controller="MenuPrincipalCtrl">
 
@@ -20,7 +7,7 @@
         <div class="">
 
 
-          <div class="item item-thumbnail-left" style="border:2px solid white; border-radius:5px">
+          <div class="item item-thumbnail-left contieneLogoRestaurante">
             <img src="img/doh-logo-transparente128.png"><br>
             <h2>Hamburguesas del Oeste</h2>
             <p>calle 92 # 11 - 32 </p>
@@ -34,18 +21,18 @@
                     <a ng-click="verMenu()" class="aSinLinea">
                       <!-- comienza ver menú -->
                       <div class="menu-pagina-menuPrincipal border-izquierda paddingTopOcho">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Ver Menú</p>
+                        <i class="ion-ios-book agrandoIcono"></i>
+                        <p class="agrandoLetra">Menú Comida</p>
                       </div>
                     </a>
                   </div>
                 </div>
                 <div class="col col-50 no-padding">
                   <div class="menu-item ">
-                    <a href="" class="aSinLinea">
-                      <div class="promociones menu-pagina-menuPrincipal border-derecha paddingTopOcho">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Promociones</p>
+                    <a ng-click="verDelDia()" class="aSinLinea">
+                      <div class="promociones menu-pagina-menuPrincipal  paddingTopOcho">
+                        <i class="ion-android-star agrandoIcono"></i>
+                        <p class="agrandoLetra">Del Día</p>
                       </div>
                     </a>
                   </div>
@@ -59,10 +46,10 @@
             
                 
                   <div class="menu-item">
-                    <a href="" class="aSinLinea">
+                    <a ng-click="verTuPedido()" class="aSinLinea">
                       <!-- comienza boton tu Pedido -->
                       <div class="tu-pedido menu-pagina-menuPrincipal paddingTopOcho">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
+                        <i class="ion-document-text agrandoIcono"></i>
                         <p class="agrandoLetra">Tu pedido</p>
                       </div>
                     </a>
@@ -70,11 +57,12 @@
                 </div>
                 <div class="col col-50 no-padding">
                   <div class="menu-item">
-                    <a href="" class="aSinLinea">
+                    <a ng-click="verPedirCuenta()" class="aSinLinea">
                       <!-- comienza Boton Pedir Cuenta -->
                       <div class="pedir-cuenta menu-pagina-menuPrincipal paddingTopOcho">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Pedir cuenta</p>
+                        <i class="ion-cash agrandoIcono separaPedirCuentaIconos"></i>
+                        <i class="ion-card agrandoIcono"></i>
+                        <p class="agrandoLetra">Pedir Cuenta</p>
                       </div>
                     </a>
                   </div>
@@ -85,11 +73,11 @@
             <div class="row no-padding">
                 <div class="col col-100 no-padding">
                   <div class="menu-item">
-                    <a href="" class="aSinLinea">
+                    <a ng-click="verLlamarMesero()" class="aSinLinea">
                       <!-- comienza boton llamar meserio -->
                       <div class="llamar-mesero menu-pagina-menuPrincipal bordes-abajo paddingTopOcho">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Llamar mesero</p>
+                        <i class="ion-android-walk agrandoIcono"></i>
+                        <p class="agrandoLetra">Llamar Mesero</p>
                       </div>
                     </a>
                   </div>

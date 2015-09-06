@@ -1,87 +1,33 @@
 <ion-view view-title="" left-buttons="leftButtons" right-buttons="rightButtons">
 
- <ion-content class="content-home" ng-controller="MenuCategoriasCtrl">
-
-  <div class="row columna">
-      <div class="col col-100 ">
-        <div class="">
-
-
-          <div class="item item-thumbnail-left" style="border:2px solid white; border-radius:5px">
+ <ion-content class="content-home" ng-controller="MenuCategoriasCtrl">        
+          <div class="item item-thumbnail-left contieneLogoRestaurante">
             <img src="img/doh-logo-transparente128.png"><br>
             <h2>Hamburguesas del Oeste</h2>
             <p>calle 92 # 11 - 32 </p>
-            
           </div>
-          <div class="" style="padding:4px">
+          <div class="cubreCategorias">
             <div class="col co-100 no-padding">
-            <div class="row no-padding">
-                <div class="col col-50 no-padding">
-                  <div class="menu-item">
-                    <a ng-repeat="categoria in categorias" ng-click="verPlatos(categoria.$id)" class="aSinLinea">
-                      <div class="menu-pagina-menuPrincipal border-izquierda">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">{{ categoria.nombreCategoria }}</p>
-                      </div>
-                    </a>
+              <div class=" no-padding">
+                  <div class=" no-padding">
+                    <div class="menu-item">
+                      <a ng-repeat="categoria in categorias" ng-click="verPlatos(categoria.$id)" class="aSinLinea">
+                        <div class="row">                                                        
+                          <div class="col col-50 menu-pagina-menuCategorias">
+                            <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
+                            <p class="agrandoLetra">{{ categoria.nombreCategoria }}</p>
+                          </div>
+                          <div class="col col-50 menu-pagina-menuCategoriasBlanco">
+                            <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
+                            <p>{{ }}</p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              <!--   <div class="col col-50 no-padding">
-                  <div class="menu-item ">
-                    <a href="" class="aSinLinea">
-                      <div class="promociones menu-pagina-menuPrincipal border-derecha">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Promociones</p>
-                      </div>
-                    </a>
-                  </div>
-                </div> -->
-            </div>
-            </div>
-            <div class="col co-100 no-padding">
-            <div class="row no-padding">
-                <div class="col col-50 no-padding">
-          
-            
-                
-               <!--    <div class="menu-item">
-                    <a href="" class="aSinLinea">
-                      <div class="tu-pedido menu-pagina-menuPrincipal">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Tu pedido</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col col-50 no-padding">
-                  <div class="menu-item">
-                    <a href="" class="aSinLinea">
-                      <div class="pedir-cuenta menu-pagina-menuPrincipal">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Pedir cuenta</p>
-                      </div>
-                    </a>
-                  </div>
-                </div> -->
-            </div>
-            </div>
-            <div class="col co-100 no-padding">
-            <div class="row no-padding">
-               <!--  <div class="col col-100 no-padding">
-                  <div class="menu-item">
-                    <a href="" class="aSinLinea">
-                      <div class="llamar-mesero menu-pagina-menuPrincipal bordes-abajo">
-                        <i class="ion-ios-email-outline icon-menu agrandoIcono"></i>
-                        <p class="agrandoLetra">Llamar mesero</p>
-                      </div>
-                    </a>
-                  </div>
-                </div> -->
-            </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-  </div>
+      
 </ion-content>
 </ion-view>

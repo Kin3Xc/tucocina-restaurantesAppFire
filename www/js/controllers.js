@@ -112,9 +112,32 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 
 
 app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias){
+  
+  // vamos a menu-categorias.html
   $scope.verMenu = function(){
     $location.url('/app/menuCategorias');
     console.log(Menu_categorias);
+  }
+
+  // vamos a del-dia.html
+  $scope.verDelDia = function(){
+    $location.url('/app/DelDia');
+  }
+
+
+  // vamos a tu-pedido.html
+  $scope.verTuPedido = function(){
+    $location.url('/app/tuPedido');
+  }
+
+
+  //vamos a pedir-cuenta.html
+  $scope.verPedirCuenta = function(){
+    $location.url('/app/pedirCuenta');
+  }
+
+  $scope.verLlamarMesero = function(){
+    $location.url('/app/llamar-mesero');
   }
 });
 

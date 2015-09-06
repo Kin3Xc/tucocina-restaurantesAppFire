@@ -63,6 +63,46 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
     }
   })
 
+.state('app.DelDia', {
+  url: '/DelDia',
+  views: { 
+    'menuContent': {
+      templateUrl : 'templates/del-dia.html'
+      // ,
+      // controller: 'DelDiaCtrl'
+    }
+  }
+})
+
+.state('app.pedirCuenta', {
+  url: '/pedirCuenta',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/pedir-cuenta.html'
+    }
+  }
+})
+
+.state('app.llamar-mesero', {
+  url: '/llamar-mesero',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/llamar-mesero.html'
+    }
+  }
+})
+
+.state('app.tuPedido', {
+  url: '/tuPedido',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/tu-pedido.html'
+      // ,
+      // controller: 'TuPedidoCtrl'
+    }
+  }
+})
+
   .state('app.menuCategorias', {
     url: '/menuCategorias', 
     views: {
