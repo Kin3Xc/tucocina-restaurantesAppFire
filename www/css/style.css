@@ -69,7 +69,7 @@
 /* agrega fuentes */
 body{font-family: 'Varela Round', sans-serif;}
 
-h1{font-family: 'Varela Round', sans-serif;}
+h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuPrincipal {
     background: lightgrey;
@@ -99,6 +99,7 @@ h1{font-family: 'Varela Round', sans-serif;}
 .promociones, .pedir-cuenta{
     margin-left:1px;
 }
+
 
 .menu-pagina-menuCategorias{
     background: lightgrey ;
@@ -256,6 +257,18 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 .contienePlatos{
     background-color: lightgrey;
     border-radius:10px;
-    padding:15px;
+    padding:5px;
+    margin-bottom:14px;
+}
+.contieneInfo{
+    color:grey;
 }
 
+.soloRadius{
+    border-radius: 8px;
+}
+
+
+.item, .item h1, .item h2, .item h3, .item h4, .item h5, .item h6, .item p, .item-content, .item-content h1, .item-content h2, .item-content h3, .item-content h4, .item-content h5, .item-content h6, .item-content p {
+   
+     white-space: normal !important; 
