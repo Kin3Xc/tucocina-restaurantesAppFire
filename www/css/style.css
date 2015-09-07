@@ -71,16 +71,16 @@ body{font-family: 'Varela Round', sans-serif;}
 
 h1{font-family: 'Varela Round', sans-serif;}
 
-.menu-pagina-menuPrincipal{
-	background: lightgrey ;
-	text-decoration: none; 
+.menu-pagina-menuPrincipal {
+    background: lightgrey;
+    text-decoration: none;
     color: grey;
-    text-align: center; 
+    text-align: center;
     height: 80px;
-    border:.9px white solid;
+    border: 2.9px white solid;
     border-radius: 8px;
     margin-left: 2px;
-    margin-bottom: 6px;
+    margin-bottom: 1px;
 }
 
 
@@ -90,14 +90,14 @@ h1{font-family: 'Varela Round', sans-serif;}
     color: white;
     text-align: center; 
     height: 80px;
-    border:.9px white solid;
+    border:2.9px lightgrey solid;
     border-radius: 8px;
     margin-left: 2px;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .promociones, .pedir-cuenta{
-    margin-left:5px;
+    margin-left:1px;
 }
 
 .menu-pagina-menuCategorias{
@@ -251,4 +251,11 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 
 
 
+
+/* comienza platos.html*/
+.contienePlatos{
+    background-color: lightgrey;
+    border-radius:10px;
+    padding:15px;
+}
 

@@ -1,10 +1,8 @@
  <ion-content class="content-home" ng-controller="PlatosCtrl">
  	<div class="row columna">
- 		<div class="col col-100 ">
- 			<br>
- 			<br>
- 			<br>
- 			<div ng-repeat="plato in platos">
+ 		<div class="col col-100" style="margin-top:40px;">
+ 	
+ 			<div ng-repeat="plato in platos" class="contienePlatos">
  				<p>Nombre: {{plato.nombrePlato}}</p>
  				<p>Descripción: {{plato.descripcion}}</p>
  				<p>Valor: {{plato.valor}}</p>
