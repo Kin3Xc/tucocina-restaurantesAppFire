@@ -2,8 +2,6 @@ var app = angular.module('tucocinaApp.controllers', ['LocalStorageModule']);
 
 
 
-
-
 app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -75,12 +73,12 @@ app.controller('MesaCtrl', function($scope, localStorageService, $location){
   //$scope.mesa = 0;
   // función para almacenar el numero de la mesa en el local storage
   $scope.mesaRestaurante = function(){
-
     var numMesa = parseInt($scope.mesa);
     console.log(numMesa);
 
     if (numMesa != 0) {
       localStorageService.set('numMesa', numMesa);
+      localStorageService.set('count', 1); // contador
       //nos vamos al estado menuPrincipal 
       $location.url('/app/menuPrincipal');
     }else{
@@ -110,7 +108,7 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 });// fin CategoriasCtrl
 
 
-
+// controlador para gestionar el menu principal de la app
 app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias){
   
   // vamos a menu-categorias.html
@@ -141,9 +139,12 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias)
   }
 });
 
+
+// controlador para gestionar el menú categorías, desde acá se cargan todas las categorías del restaurante
 app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService){
   $scope.categorias = Menu_categorias;
 
+  // función para cargar la vista de platos pertenecientes a una categoría
   $scope.verPlatos = function(idCategoria){
     console.log('Id Categoria: ' + idCategoria);
 
@@ -154,12 +155,13 @@ app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias
 });
 
 
-
+// controlador para gestionar los platos de una categoría
 app.controller('PlatosCtrl', function($scope, $location, localStorageService){
-  var id = localStorageService.get('idCategoria');
+  var id = localStorageService.get('idCategoria'); // accedo al id de la categoría seleccionada por el usuario
+  $scope.platos = null; //limpio el $scope de platos
 
   var count = 0;
-  var listPlatos = [];
+  var listPlatos = []; // array para ir almacenando los platos de una categoría
 
   var platos = new Firebase("https://tucocina.firebaseio.com/platos/");
   platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
@@ -182,7 +184,19 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService){
 });
 
 
+// controlador para gestionar los platos seleccioniados en una mesa
 app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorageService, Pedidos){
+  // octener los pedidos de la mesa que estan en el local storage
+  var contador = localStorageService.get('count');
+
+  var pedidosMesa = [];
+
+  for (var i = 0; i <= contador; i++) {
+    pedidosMesa[i] = localStorageService.get('pedido'+i);
+    console.log(pedidosMesa);
+  };
+
+
   var id = localStorageService.get('idPlato');
 
   var plato = new Firebase("https://tucocina.firebaseio.com/platos/"+id).once('value', function(data){
@@ -190,7 +204,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     console.log('Plato: '+$scope.platoSelect);
   });
 
-  //ingredientes
+  //ingredientes de un plato
   var count = 0;
   var ingredientes = [];
 
@@ -204,7 +218,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     console.log($scope.ingredientesPlato);
   });
 
-  // adicionales
+  // adicionales de un plato
   var count = 0;
   var adicionales = [];
 
@@ -217,7 +231,6 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     console.log('Listado de adicionales');
     console.log($scope.adicionalesPlato);
   });
-
 
 
   //regresa los pedidos de una sola mesa
@@ -237,6 +250,32 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
   });
 
 
+  //función para ver el resumen del pedido
+  $scope.verResumen = function(){
+    // creo un ibjeto con el pedido para almacenarlo en el localstorage
+    var count = localStorageService.get('count'); //contador para contar la cantidad de pedidos de la mesa
+
+    var pedido = {
+      plato: $scope.platoSelect.nombrePlato,
+      precio: $scope.platoSelect.valor,
+      estado: 'en proceso',
+      ingredientes: [$scope.ingredientesPlato],
+      adicionales: [$scope.adicionalesPlato]
+    };
+
+    localStorageService.set('pedido'+count, pedido);
+    count++;
+    localStorageService.set('count', count);
+
+     $location.url('app/resumen');
+    }
+  
+
+  // función para realizar un nuevo pedido en la mesa actual
+  $scope.otroPedido = function(){
+    $location.url('/app/menuCategorias');
+  };
+
 
   // función para enviar el pedido, despúes de esto el pedido llegará al mesero
   // luego de confirmar el envío se le redireccionará al resumen desde donde podrá realizar 
@@ -255,14 +294,6 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
     Pedidos.$add(pedido);
 
-    $location.url('app/resumen');
-
-  };
-
-
-  // función para realizar un nuevo pedido en la mesa actual
-  $scope.otroPedido = function(){
-    $location.url('/app/menuCategorias');
   };
 
 
