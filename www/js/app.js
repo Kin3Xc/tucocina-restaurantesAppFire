@@ -124,10 +124,10 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   })
 
   .state('app.platoSeleccionado', {
-    url: '/platoSeleccionado', 
+    url: '/plato-seleccionado', 
     views: {
       'menuContent': {
-        templateUrl: 'templates/platoSeleccionado.html',
+        templateUrl: 'templates/plato-seleccionado.html',
         controller: 'platoSeleccionadoCtrl'
       }
     }

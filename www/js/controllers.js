@@ -179,7 +179,7 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService){
     console.log('ID Plato Seleccionado: '+ idPlato);
     localStorageService.set('idPlato', idPlato);
 
-    $location.url('/app/platoSeleccionado');
+    $location.url('/app/plato-seleccionado');
   };
 });
 
@@ -193,7 +193,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
   for (var i = 0; i <= contador; i++) {
     pedidosMesa[i] = localStorageService.get('pedido'+i);
-    console.log(pedidosMesa);
+    // console.log(pedidosMesa);
   };
 
 
@@ -201,7 +201,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
   var plato = new Firebase("https://tucocina.firebaseio.com/platos/"+id).once('value', function(data){
     $scope.platoSelect = data.val();
-    console.log('Plato: '+$scope.platoSelect);
+    console.log($scope.platoSelect);
   });
 
   //ingredientes de un plato
@@ -214,9 +214,12 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     ingredientes[count] = ingrediente.val();
     ingredientes[count].$id = ingrediente.key();
     $scope.ingredientesPlato = ingredientes.filter(Boolean);
-    console.log('Listado de ingredientes');
-    console.log($scope.ingredientesPlato);
+    
+    // console.log('Listado de ingredientes');
+    // console.log($scope.ingredientesPlato);
   });
+
+   
 
   // adicionales de un plato
   var count = 0;
@@ -228,8 +231,8 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     adicionales[count] = adicional.val();
     adicionales[count].$id = adicional.key();
     $scope.adicionalesPlato = adicionales.filter(Boolean);
-    console.log('Listado de adicionales');
-    console.log($scope.adicionalesPlato);
+    // console.log('Listado de adicionales');
+    // console.log($scope.adicionalesPlato);
   });
 
 
@@ -245,8 +248,8 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     console.log(mesaActual);
     // mesaActual[count].$id = mesa.key();
     $scope.pedidosMesa = mesaActual.filter(Boolean);
-    console.log('Listado de platos de la mesa');
-    console.log($scope.pedidosMesa);
+    // console.log('Listado de platos de la mesa');
+    // console.log($scope.pedidosMesa);
   });
 
 
