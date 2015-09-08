@@ -1,17 +1,22 @@
- <ion-content class="content-home" ng-controller="platoSeleccionadoCtrl">
+ <ion-content class="content-home">
  	<div class="row columna">
- 		<div class="col col-100 ">
+ 		<div class="col col-100">
  			<br>
  			<br>
- 			<div class="panel" ng-repeat="pedido in pedidosMesa">
- 				<h2>Plato seleccionado</h2>
- 				<p>Nombre: {{pedido.plato}}</p>
- 				<p>Mesa: {{pedido.mesa}}</p>
- 				<p>Valor: {{pedido.precio}}</p>
- 				<br>
+ 			<div class="panel">
+ 				<div ng-repeat="pedido in misPedidos">
+	 				<h2>Plato seleccionado</h2>
+	 				<p>Nombre: {{pedido.plato}}</p>
+	 				<p>Estado: {{pedido.estado}}</p>
+	 				<p>Valor: {{pedido.precio}}</p>
+	 				<br>
+ 				</div>
  			</div>
  			<button ng-click="otroPedido()" class="button button-block button-stable">
 			  Pedir otro plato
+			</button>
+			<button ng-click="enviarPedido()" class="button button-block button-stable">
+			  Envíar pedido
 			</button>
  		</div>
  	</div>
