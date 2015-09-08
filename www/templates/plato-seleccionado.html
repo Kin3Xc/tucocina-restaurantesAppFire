@@ -1,0 +1,110 @@
+ <ion-content class="content-home">
+ 	
+
+ 	<div class="row" >
+ 		<div class="col col-100" style="margin-top: 0px;background:lightgrey;border-radius:8px;">
+ 			
+ 			<div class="panel" style="background:white;border-radius:8px;">
+ 				<h2 class="" style="margin:0;padding-top:10px;padding-left:10px">{{platoSelect.nombrePlato}}</h2>
+ 				<br>
+ 				<div class="centrado">
+
+ 				<div class="row" style="margin:0">
+ 					<div class="col col-100">
+ 						<img ng-src="http://tucocinavirtual.com/test/uploads/{{ platoSelect.imagen }}" alt="">		
+ 					</div>
+ 				</div>	
+ 				
+				</div>
+
+ 				<h5 class="center" style="    margin-top: -26px;padding-top:0px;margin-left:10px;">{{platoSelect.descripcion}}</h5>
+ 			<div>
+ 				<h3 class="centrado" style="margin-right:10px;margin-top:10px;">{{platoSelect.valor | currency : "$" : 0}}</h3>
+ 				</div>
+ 				
+ 				
+ 			
+
+ 		
+				
+ 					
+
+		<!-- 		<div class="row">
+					<div class="col col-50">
+						<button ng-click="verResumen()" class="button button-block button-stable">
+						  Agregar al Pedido
+						</button>
+
+					</div>
+					<div class="col col-50">
+					
+		 				<button ng-click="otroPedido()" class="button button-block button-stable">
+						  Volver al menú
+						</button>	
+
+
+					</div>
+				</div> -->
+
+<div class="col col-80" style="margin:0 auto;" >
+			<button style="margin-top: -7px;border-radius:10px" ng-click="verResumen()" class="button button-block button-dark centrado">
+			   Agregar al Pedido
+		    </button>
+		</div>
+	 			
+ 			</div>
+			<div class="row" style="color:grey;">
+	 			<div class="panel col col-50" style="border: 2px solid whitesmoke;
+    border-radius: 9px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;">
+	 				<h4 class="centrado" style="color:grey;">Ingredientes</h4>
+	 				<div ng-repeat="ingrediente in ingredientesPlato">
+	 					<ul class="list">
+	 						<li class="centrado" style="background:white">
+	 							  
+	 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
+	 							  <label class="checkbox">
+				                       <input checked type="checkbox" value="{{adicional.nombreAdicional}}">
+				                     </label>
+				                     
+	 						</li>
+	 					</ul>
+	 				</div>
+
+
+
+	 			</div>
+
+	 			<div class="panel col col-50" style="border: 2px solid whitesmoke;
+				    border-radius: 9px;
+				    border-top-right-radius: 10px;
+				    border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
+	 				<h4 class="centrado" style="color:grey;">Adicionales</h4>
+	 				<div ng-repeat="adicional in adicionalesPlato">
+						<ul class="list">
+							<li class="item item-checkbox">
+								<label class="checkbox">
+									<input type="checkbox" value="">
+								</label>
+								<p class="centrado">{{adicional.nombreAdicional}}</p> 
+								<p class="centrado">{{adicional.valor | currency : "$" : 0}}</p>
+
+							</li>
+
+						</ul>
+
+
+
+
+	 					
+	 					
+	 				</div>
+	 			</div>
+
+ 			</div>
+ 			
+ 		</div>
+ 	</div>
+ </ion-content>
