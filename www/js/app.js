@@ -22,7 +22,9 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(0);
   $stateProvider
 
     .state('app', {
@@ -138,7 +140,7 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
     views: {
       'menuContent': {
         templateUrl: 'templates/resumen.html',
-        controller: 'platoSeleccionadoCtrl'
+        controller: 'ResumenCtrl'
       }
     }
   });
