@@ -199,35 +199,23 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
     $ionicHistory.clearCache();
     $state.go('app.platoSeleccionado');
 
+
     $location.url('/app/plato-seleccionado');
+
 
   };
 });
 
 
 
-// app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorageService, Pedidos){
-//   // octener los pedidos de la mesa que estan en el local storage
-//   var contador = localStorageService.get('count');
-
-//   var pedidosMesa = [];
-
-//   for (var i = 0; i <= contador; i++) {
-//     pedidosMesa[i] = localStorageService.get('pedido'+i);
-//     // console.log(pedidosMesa);
-//   };
-
-
 // controlador para gestionar los platos seleccioniados en una mesa
 app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorageService, Pedidos, $ionicHistory, $state){
-
 
   var id = localStorageService.get('idPlato');
 
   var plato = new Firebase("https://tucocina.firebaseio.com/platos/"+id).once('value', function(data){
     $scope.platoSelect = data.val();
     console.log($scope.platoSelect);
-
   });
 
   //ingredientes de un plato
@@ -240,14 +228,13 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     ingredientes[count] = ingrediente.val();
     ingredientes[count].$id = ingrediente.key();
     $scope.ingredientesPlato = ingredientes.filter(Boolean);
+
     
     // console.log('Listado de ingredientes');
     // console.log($scope.ingredientesPlato);
 
   });
-
    
-
   // adicionales de un plato
   var count = 0;
   var adicionales = [];
@@ -258,6 +245,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     adicionales[count] = adicional.val();
     adicionales[count].$id = adicional.key();
     $scope.adicionalesPlato = adicionales.filter(Boolean);
+
 
     // console.log('Listado de adicionales');
     // console.log($scope.adicionalesPlato);
@@ -362,6 +350,7 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
     console.log($scope.miPedidoFianal);
 
     $scope.miPedidoFianal.mesa = mesa;
+
 
     Pedidos.$add($scope.miPedidoFianal);
 
