@@ -9,22 +9,16 @@
  			
  				<div class="centrado">
  					<div >
- 						<img ng-src="http://tucocinavirtual.com/test/uploads/{{ platoSelect.imagen }}" alt="">		
+ 						<img class="plato-img" ng-src="http://tucocinavirtual.com/test/uploads/{{ platoSelect.imagen }}" alt="">		<h5> {{platoSelect.descripcion}}</h5>
  					</div>
  				</div>	
  			
 
- 				<h5 class="center" style="    margin-top: -26px;padding-top:0px;margin-left:10px;">{{platoSelect.descripcion}}</h5>
+ 				
  			<div>
  				<h3 class="centrado" style="margin-right:10px;margin-top:10px;">{{platoSelect.valor | currency : "$" : 0}}</h3>
  				</div>
- 				
- 				
- 			
-
- 		
-				
- 					
+ 						
 
 		<!-- 		<div class="row">
 					<div class="col col-50">
@@ -43,7 +37,7 @@
 					</div>
 				</div> -->
 
-<div class="col col-80" style="margin:0 auto;" >
+<div class="col col-100" style="margin:0 auto;" >
 			<button style="margin-top: -7px;border-radius:10px" ng-click="verResumen()" class="button button-block button-dark centrado">
 			   Agregar al Pedido
 		    </button>
@@ -51,55 +45,41 @@
 	 			
  			</div>
 			<div class="row" style="color:grey;">
-	 			<div class="panel col col-50" style="border: 2px solid whitesmoke;
-    border-radius: 9px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;">
-	 				<h4 class="centrado" style="color:grey;">Ingredientes</h4>
-	 				<div ng-repeat="ingrediente in ingredientesPlato">
-	 					<ul class="list">
-	 						<li class="centrado" style="background:white">
-	 							  
+				<div class="col col-100">
+					<div class="card">
+  						<div class="item item-divider">
+						    Ingredientes
+						 </div>
+						 	<div class="item item-text-wrap">
+	 							<ul class="list flex-wrap">
+	 									<li ng-repeat="ingrediente in ingredientesPlato" class="centrado ingrediente-item" style="background:white">
 	 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
 	 							  <label class="checkbox">
 				                       <input checked type="checkbox" value="{{adicional.nombreAdicional}}">
 				                     </label>
 				                     
-	 						</li>
-	 					</ul>
-	 				</div>
+	 									</li>
+	 							</ul>
+						 	 </div>
+						</div>
+						<div class="card">
+  						<div class="item item-divider">
+						    Adicionales
+						  </div>
+						  <div class="item item-text-wrap item-height">
+	 							<ul class="list flex-wrap">
+	 									<li ng-repeat="adicional in adicionalesPlato" class="centrado adicional-item">
+											<label class="checkbox">
+											<input type="checkbox" value="">
+											</label>
+											<p class="centrado">{{adicional.nombreAdicional}}</p> 
+											<p class="centrado">{{adicional.valor | currency : "$" : 0}}</p>
 
-
-
-	 			</div>
-
-	 			<div class="panel col col-50" style="border: 2px solid whitesmoke;
-				    border-radius: 9px;
-				    border-top-right-radius: 10px;
-				    border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-	 				<h4 class="centrado" style="color:grey;">Adicionales</h4>
-	 				<div ng-repeat="adicional in adicionalesPlato">
-						<ul class="list">
-							<li class="item item-checkbox">
-								<label class="checkbox">
-									<input type="checkbox" value="">
-								</label>
-								<p class="centrado">{{adicional.nombreAdicional}}</p> 
-								<p class="centrado">{{adicional.valor | currency : "$" : 0}}</p>
-
-							</li>
-
-						</ul>
-
-
-
-
-	 					
-	 					
-	 				</div>
-	 			</div>
-
+										</li>
+	 							</ul>						  	
+						  </div>
+						</div>
+				</div>
  			</div>
  			
  		</div>
