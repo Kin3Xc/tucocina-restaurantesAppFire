@@ -156,25 +156,25 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 }
 
 .aSinLinea{
-	text-decoration:none;
+    text-decoration:none;
 }
 
 .no-padding{
-	padding:0px;
+    padding:0px;
 }
 
 .bordes-abajo{
-	    margin-top: 4px;
+        margin-top: 4px;
     /* border-bottom-left-radius: 20px; */
     /* border-bottom-right-radius: 7px; */
     border-radius: 13px;
 }
 
 .border-izquierda{
-	border-top-left-radius:10px;
+    border-top-left-radius:10px;
 }
 /*.border-derecha{
-	border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
     border-radius: 8px;
     margin-left: 2px;
     margin-bottom: 2px;
@@ -186,7 +186,7 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 }
 
 .bar.bar-energized{
-	background-color:#FEC503 ;
+    background-color:#FEC503 ;
 }
 
 .bar.bar-stable .title {
@@ -273,3 +273,34 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 .item, .item h1, .item h2, .item h3, .item h4, .item h5, .item h6, .item p, .item-content, .item-content h1, .item-content h2, .item-content h3, .item-content h4, .item-content h5, .item-content h6, .item-content p {
    
      white-space: normal !important; 
+}
+/* View template plato-seleccionado*/
+
+
+
+.flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.ingrediente-item{
+    margin: 0 24px;
+}
+.adicional-item{
+    margin: 0 24px;
+}
+.item-height{
+    height: auto;
+    margin-bottom: 50px !important;
+}
+.plato-img{
+    width: 237px;
+    height: 213px;
+}
+
+.card{
+    margin: 0;
+}
+
+
+
