@@ -57,18 +57,22 @@
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;">
 	 				<h4 class="centrado" style="color:grey;">Ingredientes</h4>
-	 				<div ng-repeat="ingrediente in ingredientesPlato">
-	 					<ul class="list">
-	 						<li class="centrado" style="background:white">
-	 							  
-	 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
-	 							  <label class="checkbox">
-				                       <input checked type="checkbox" value="{{adicional.nombreAdicional}}">
-				                     </label>
-				                     
-	 						</li>
-	 					</ul>
-	 				</div>
+	 				
+
+	 				<div id="contieneCheck">
+		 				<div ng-repeat="ingrediente in ingredientesPlato">
+		 					<ul class="list">
+		 						<li class="centrado" style="background:white">
+		 							  
+		 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
+		 							  <label class="checkbox">
+					                       <input checked="checked" type="checkbox" value="{{ingrediente.nombreIngrediente}}">
+					                     </label>
+					                     
+		 						</li>
+		 					</ul>
+		 				</div>
+		 			</div>	
 
 
 

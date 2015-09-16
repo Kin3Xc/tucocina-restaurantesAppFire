@@ -208,6 +208,12 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
 
 
 
+
+
+
+
+
+
 // controlador para gestionar los platos seleccioniados en una mesa
 app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorageService, Pedidos, $ionicHistory, $state){
 
@@ -274,7 +280,8 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
   //función para ver el resumen del pedido
   $scope.verResumen = function(){
-    // creo un ibjeto con el pedido para almacenarlo en el localstorage
+
+    // creo un objeto con el pedido para almacenarlo en el localstorage
     var count = localStorageService.get('count'); //contador para contar la cantidad de pedidos de la mesa
 
     var pedido = {
@@ -287,6 +294,34 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
     localStorageService.set('pedido'+count, pedido);
 
+
+    // identifico ingredientes
+    var divCont = document.getElementById('contieneCheck');
+
+    var checkIngredientes = divCont.getElementsByTagName('input');
+    var IngredientesSeleccionados = [];
+
+    for(var i = 0; i < checkIngredientes.length; i++){
+
+      if(checkIngredientes[i].checked == true){
+        console.log('valor de i: '+ i);
+      
+        
+
+        if(checkIngredientes[i] != ""){
+          console.log(ingrediente);
+          var ingrediente = checkIngredientes[i].value;
+          IngredientesSeleccionados[i] = ingrediente;
+        }
+      }
+    }
+
+    console.log(IngredientesSeleccionados);
+
+    localStorageService.set('ingredientes'+count, IngredientesSeleccionados);
+
+
+
     count++;
     localStorageService.set('count', count);
 
@@ -297,6 +332,18 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 // controlador para mostrar el resumen de pedidos de la mesaActual
 app.controller('ResumenCtrl', function($scope, $location, localStorageService, Pedidos, $ionicLoading, $timeout, $ionicHistory, $state){
@@ -339,6 +386,7 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
   $scope.enviarPedido = function(){
     var mesa = localStorageService.get('numMesa');
      // obtener los pedidos de la mesa que estan en el local storage
+
     var count = localStorageService.get('count');
     var pedidoFinal = [];
 
