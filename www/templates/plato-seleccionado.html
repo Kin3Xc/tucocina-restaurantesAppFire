@@ -106,11 +106,11 @@
 						    Ingredientes
 						 </div>
 						 	<div class="item item-text-wrap">
-	 							<ul class="list flex-wrap">
+	 							<ul id="contieneCheck" class="list flex-wrap">
 	 									<li ng-repeat="ingrediente in ingredientesPlato" class="centrado ingrediente-item" style="background:white">
 	 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
 	 							  <label class="checkbox">
-				                       <input checked type="checkbox" value="{{adicional.nombreAdicional}}">
+				                       <input checked type="checkbox" value="{{ingrediente.nombreIngrediente}}">
 				                     </label>
 				                     
 	 									</li>

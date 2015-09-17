@@ -153,8 +153,28 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
 
 
 // controlador para gestionar el menú categorías, desde acá se cargan todas las categorías del restaurante
-app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state){
-  $scope.categorias = Menu_categorias;
+app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state, $ionicLoading, $timeout){
+
+
+  
+$ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
+
+
+
+$timeout(function(){
+  $ionicLoading.hide();
+
+  $scope.categorias = Menu_categorias
+
+}, 2000);
+  
+
 
   // función para cargar la vista de platos pertenecientes a una categoría
   $scope.verPlatos = function(idCategoria){
@@ -171,24 +191,60 @@ app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias
 });
 
 
+
+
+
+
+
+
+
 // controlador para gestionar los platos de una categoría
-app.controller('PlatosCtrl', function($scope, $location, localStorageService, $ionicHistory, $state){
-  var id = localStorageService.get('idCategoria'); // accedo al id de la categoría seleccionada por el usuario
-  $scope.platos = null; //limpio el $scope de platos
+app.controller('PlatosCtrl', function($scope, $location, localStorageService, $ionicHistory, $state, $ionicLoading, $timeout){
 
-  var count = 0;
-  var listPlatos = []; // array para ir almacenando los platos de una categoría
 
-  var platos = new Firebase("https://tucocina.firebaseio.com/platos/");
-  platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
-    count++;
-    listPlatos[count] = plato.val();
-    listPlatos[count].$id = plato.key();
-    $scope.platos = listPlatos.filter(Boolean);
-  });
-  console.log('Listado de platos');
+    var id = localStorageService.get('idCategoria'); // accedo al id de la categoría seleccionada por el usuario
+    $scope.platos = null; //limpio el $scope de platos
+
+    var count = 0;
+    var listPlatos = []; // array para ir almacenando los platos de una categoría
+    var platos = '';
+    platos = new Firebase("https://tucocina.firebaseio.com/platos/");
+
+
+
+
+
+  
+
+
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+
+  
+  $timeout(function(){
+    $ionicLoading.hide();
+
+     platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
+      count++;
+      listPlatos[count] = plato.val();
+      listPlatos[count].$id = plato.key();
+      $scope.platos = listPlatos.filter(Boolean);
+    });
+    console.log('Listado de platos');
     console.log($scope.platos);
+  
+    
 
+
+    }, 3000);
+
+
+  
 
   //funcion para mostrara la visata y la info del plato seleccionado por el usuario
   $scope.pedirPlato = function(idPlato){
@@ -306,15 +362,16 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
       if(checkIngredientes[i].checked == true){
         console.log('valor de i: '+ i);
       
-        
-
-        if(checkIngredientes[i] != ""){
+      
+        if(checkIngredientes[i] != null ){
           console.log(ingrediente);
           var ingrediente = checkIngredientes[i].value;
           IngredientesSeleccionados[i] = ingrediente;
         }
       }
     }
+    // remueve elementos null o undefined o 0
+    IngredientesSeleccionados = IngredientesSeleccionados.filter(function(e){return e});
 
     console.log(IngredientesSeleccionados);
 
@@ -358,7 +415,7 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
 
     $timeout(function () {
       $ionicLoading.hide();
-    // obtener los pedidos de la mesa que estan en el local storage
+      // obtener los pedidos de la mesa que estan en el local storage
       var count = localStorageService.get('count');
       var pedidosMesaActual = [];
 
@@ -369,7 +426,7 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
       $scope.misPedidos = pedidosMesaActual.filter(Boolean);
       console.log('PEDIDOS DE LA MESA');
       console.log($scope.misPedidos);
-  }, 1000);
+    }, 1000);
 
    // función para realizar un nuevo pedido en la mesa actual
     $scope.otroPedido = function(){
