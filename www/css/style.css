@@ -301,6 +301,24 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 .card{
     margin: 0;
 }
-
-
+/* Lista de platos */
+.plato-precio{
+    float: right;
+    color: #52C128 !important;
+}
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+}
+.slider-img{
+width: 100%;
+height: 150px;
+}
 
