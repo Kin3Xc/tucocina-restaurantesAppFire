@@ -15,7 +15,7 @@
       
   </div>
 <div class="row columna">
-			      <div class="col col-100 platos-list">
+			    <div class="col col-100 platos-list">
 			      <div ng-click="pedirPlato(plato.$id)" class="list contienePlatos" ng-repeat="plato in platos">
 			          <a class=" item item-thumbnail-left soloRadius">
 			            <img style="width:150px" ng-src="http://tucocinavirtual.com/test/uploads/{{ plato.imagen }}">
@@ -25,14 +25,15 @@
 			            <p>{{plato.descripcion}}
 
 			            <div class="item-info" style="float:right">
-			              <br><br>${{plato.valor}}
+			              <p class="plato-precio">{{plato.valor | currency : "$" : 0 }}</p>
 			            </div>
 			            </p>
 			            <p>{{plato.idCategoria.nombreCategoria}}</p>
 			          </a>
 			      </div>
 			      </div>
-			    </div>
+</div>
+
 
 
  </ion-content>
