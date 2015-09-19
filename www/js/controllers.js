@@ -214,8 +214,6 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
 
 
 
-  
-
 
       $ionicLoading.show({
         content: 'Loading',
@@ -224,6 +222,9 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
         maxWidth: 200,
         showDelay: 0
       });
+
+
+
 
   
   $timeout(function(){
