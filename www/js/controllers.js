@@ -152,27 +152,46 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
 });
 
 
-// controlador para gestionar el menú categorías, desde acá se cargan todas las categorías del restaurante
-app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state, $ionicLoading, $timeout){
 
+
+
+
+// controlador para gestionar el menú categorías, desde acá se cargan todas las categorías del restaurante
+app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state, $ionicLoading){
+
+$scope.loadingIndicator = $ionicLoading.show({
+  content: 'Loading Data',
+  animation: 'fade-in',
+  showBackdrop: true,
+  maxWidth: 200,
+  showDelay: 500
+});
+
+Menu_categorias.getCategorias().then(
+  function(categorias){
+    $scope.categorias = categorias;
+    $ionicLoading.hide();
+  }
+)
 
   
-$ionicLoading.show({
-      content: 'Loading',
-      animation: 'fade-in',
-      showBackdrop: true,
-      maxWidth: 200,
-      showDelay: 0
-    });
+// $ionicLoading.show({
+//       content: 'Loading',
+//       animation: 'fade-in',
+//       showBackdrop: true,
+//       maxWidth: 200,
+//       showDelay: 0
+//     });
 
 
 
-$timeout(function(){
-  $ionicLoading.hide();
+// $timeout(function(){
+  // $ionicLoading.hide();
 
-  $scope.categorias = Menu_categorias
+  // asigno el array que llega de fb
+  // $scope.categorias = Menu_categorias;
 
-}, 2000);
+// }, 2000);
   
 
 
@@ -199,50 +218,64 @@ $timeout(function(){
 
 
 // controlador para gestionar los platos de una categoría
-app.controller('PlatosCtrl', function($scope, $location, localStorageService, $ionicHistory, $state, $ionicLoading, $timeout){
-
-
-    var id = localStorageService.get('idCategoria'); // accedo al id de la categoría seleccionada por el usuario
+app.controller('PlatosCtrl', function($scope, $location, localStorageService, $ionicHistory, $state, $ionicLoading, $timeout, Platos, PlatoId){
     $scope.platos = null; //limpio el $scope de platos
 
-    var count = 0;
-    var listPlatos = []; // array para ir almacenando los platos de una categoría
-    var platos = '';
-    platos = new Firebase("https://tucocina.firebaseio.com/platos/");
+    // var id = localStorageService.get('idCategoria'); // accedo al id de la categoría seleccionada por el usuario
+    // $scope.platos = null; //limpio el $scope de platos
 
+    // var count = 0;
+    // var listPlatos = []; // array para ir almacenando los platos de una categoría
+    // var platos = '';
+    // platos = Platos;
+    // platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
+    //         count++;
+    //         listPlatos[count] = plato.val();
+    //         listPlatos[count].$id = plato.key();
 
+    //          $scope.platos = listPlatos.filter(Boolean);
+        
+    //       console.log('Listado de platos');
+    //       console.log($scope.platos);
+        
 
+    //   });
 
-
-
-      $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
-      });
-
-
-
-
-  
-  $timeout(function(){
-    $ionicLoading.hide();
-
-     platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
-      count++;
-      listPlatos[count] = plato.val();
-      listPlatos[count].$id = plato.key();
-      $scope.platos = listPlatos.filter(Boolean);
+    $scope.loadingIndicator = $ionicLoading.show({
+      content: 'Loading Data',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 500
     });
-    console.log('Listado de platos');
-    console.log($scope.platos);
+
+
+    Platos.getPlatos().then(
+      function(platos){
+
+
+         PlatoId.getPlatoId().then(function(platoId){
+          $scope.platos = platoId;
+          $ionicLoading.hide();
+         })  
+      });
+  
+  // // $timeout(function(){
+  //   $ionicLoading.hide();
+
+    //  platos.orderByChild("idCategoria").equalTo(id).on("child_added", function(plato) {
+    //   count++;
+    //   listPlatos[count] = plato.val();
+    //   listPlatos[count].$id = plato.key();
+    //   $scope.platos = listPlatos.filter(Boolean);
+    // });
+    // console.log('Listado de platos');
+    // console.log($scope.platos);
   
     
 
 
-    }, 3000);
+    // }, 3000);
 
 
   
