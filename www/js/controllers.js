@@ -149,7 +149,11 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
   $scope.verLlamarMesero = function(){
     $location.url('/app/llamar-mesero');
   }
+
+  // AQUI FUNCION PARA TRAER LOS SLIDER DE PROMO
+
 });
+
 
 
 
@@ -167,9 +171,9 @@ $scope.loadingIndicator = $ionicLoading.show({
   showDelay: 500
 });
 
-Menu_categorias.getCategorias().then(
-  function(categorias){
+Menu_categorias.getCategorias().then(function(categorias){
     $scope.categorias = categorias;
+    console.log($scope.categorias);
     $ionicLoading.hide();
   }
 )
@@ -237,7 +241,6 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
         
     //       console.log('Listado de platos');
     //       console.log($scope.platos);
-        
 
     //   });
 
@@ -252,7 +255,6 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
 
     Platos.getPlatos().then(
       function(platos){
-
 
          PlatoId.getPlatoId().then(function(platoId){
           $scope.platos = platoId;
