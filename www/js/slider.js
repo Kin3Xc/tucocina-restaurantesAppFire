@@ -1,5 +1,33 @@
-angular.module('tucocinaApp.slider', [])
-	.controller('mainSlider',function($scope,$state){
+angular.module('tucocinaApp.slider', ['LocalStorageModule'])
+	.controller('mainSlider',function($scope,$state, $firebaseArray, localStorageService, $ionicLoading, $timeout){
+
+		$scope.loadingIndicator = $ionicLoading.show({
+	      content: 'Loading Data',
+	      animation: 'fade-in',
+	      showBackdrop: true,
+	      maxWidth: 200,
+	      showDelay: 500
+	    });
+
+
+		var id_user = localStorageService.get('idUser');
+
+		var img_slider = null;
+	    var count = 0;
+	    var listSlider = [];
+
+		var img_promos = new Firebase("https://tucocina.firebaseio.com/img_promos");
+		// $scope.slides = $firebaseArray(img_promos);
+		img_promos.orderByChild("id_user").equalTo(id_user).on("child_added", function(imagen) {
+			count++;
+            listSlider[count] = imagen.val();
+		});
+
+		$timeout(function(){
+			$scope.slides = listSlider.filter(Boolean);
+			console.log($scope.slides);
+			$ionicLoading.hide();
+		},2500);
 
 		$scope.slides =[
 			{
@@ -23,7 +51,7 @@ angular.module('tucocinaApp.slider', [])
 				text:''
 			},			
 		];
-
-
+		 
+console.log($scope.slides);
 
 	});

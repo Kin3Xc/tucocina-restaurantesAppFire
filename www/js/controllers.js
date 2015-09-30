@@ -48,10 +48,37 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 // CONTROLADORES DE LA APP
 
 // controlador para la vista home, encargada de recoger el código del restaurante
-app.controller('HomeCtrl', function($scope, localStorageService, $location, $ionicHistory, $state) {
+app.controller('HomeCtrl', function($scope, localStorageService, $location, $ionicHistory, $state, $ionicLoading, $timeout,  $ionicPopup) {
   //$scope.pin = 0;
   // almaceno el código del restaurante en el local storage
+
+
+   // An alert dialog
+   $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'PIN no válido!',
+       template: 'El PIN ingresado no es válido, por favor vuelva a intentarlo.'
+     });
+     alertPopup.then(function(res) {
+        $scope.pin = '';
+       console.log('PIN no válido');
+     });
+   };
+
+  $scope.restauranteSelecionado = null;
+
   $scope.saveCodigoRestaurante = function(){
+
+    $scope.loadingIndicator = $ionicLoading.show({
+      content: 'Loading Data',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 500
+    });
+
+
+
 
     var codigo = parseInt($scope.pin);
     console.log(codigo);
@@ -59,9 +86,38 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
     if (codigo != 0) {
       localStorageService.set('codigoRestaurante', codigo);
 
-      $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
-      $state.go('app.mesa');
+      var restSeleccionado = [];
+
+      //verifico qe ese codigo pertenece a algun restaurante
+      var restID = new Firebase("https://tucocina.firebaseio.com/restaurantes");
+      restID.orderByChild("nit").equalTo(codigo).on("child_added", function(rest) {
+        
+        restSeleccionado[0] = rest.val();
+        restSeleccionado[0].$id = rest.key();
+
+        // mandaPlatoId = listPlatos.filter(Boolean);
+      });
+
+
+      // asigno lo que deja la funcion al scope
+      $timeout(function(){
+        $scope.restauranteSelecionado = restSeleccionado;
+        console.log($scope.restauranteSelecionado);
+        if ($scope.restauranteSelecionado[0] == null) {
+          console.log('NO EXISTE!');
+          $ionicLoading.hide();
+
+          $scope.showAlert();
+
+        }else{
+          localStorageService.set('idUser', $scope.restauranteSelecionado[0].id_user);
+          $ionicLoading.hide();
+          $state.go('app.mesa');
+        }
+      }, 2500);
+
+      // $ionicHistory.clearHistory();
+      // $ionicHistory.clearCache();
       //$location.url('/app/mesa');
     }else{
       $scope.respuesta_codigo = 'Ingrese el código del restaurante';
@@ -84,8 +140,8 @@ app.controller('MesaCtrl', function($scope, localStorageService, $location,$ioni
       localStorageService.set('numMesa', numMesa);
       localStorageService.set('count', 1); // contador
       //nos vamos al estado menuPrincipal 
-      $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
+      // $ionicHistory.clearHistory();
+      // $ionicHistory.clearCache();
       $state.go('app.menuPrincipal');
 
       //$location.url('/app/menuPrincipal');
@@ -122,8 +178,8 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
   
   // vamos a menu-categorias.html
   $scope.verMenu = function(){
-    $ionicHistory.clearHistory();
-    $ionicHistory.clearCache();
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
     $state.go('app.menuCategorias');
     //$location.url('/app/menuCategorias');
     console.log(Menu_categorias);
@@ -149,11 +205,7 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
   $scope.verLlamarMesero = function(){
     $location.url('/app/llamar-mesero');
   }
-
-  // AQUI FUNCION PARA TRAER LOS SLIDER DE PROMO
-
 });
-
 
 
 
@@ -161,22 +213,46 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
 
 
 // controlador para gestionar el menú categorías, desde acá se cargan todas las categorías del restaurante
-app.controller('MenuCategoriasCtrl', function($scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state, $ionicLoading){
+app.controller('MenuCategoriasCtrl', function($timeout, $scope, $location, Menu_categorias, localStorageService, $ionicHistory, $state, $ionicLoading){
 
-$scope.loadingIndicator = $ionicLoading.show({
-  content: 'Loading Data',
-  animation: 'fade-in',
-  showBackdrop: true,
-  maxWidth: 200,
-  showDelay: 500
+    $scope.loadingIndicator = $ionicLoading.show({
+      content: 'Loading Data',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 500
+    });
+
+
+var id = localStorageService.get('codigoRestaurante');
+var mandaPlatoId = null;
+var count = 0;
+var listPlatos = [];
+
+var categorias = new Firebase("https://tucocina.firebaseio.com/categorias");
+categorias.orderByChild("id_restaurante").equalTo(id).on("child_added", function(plato) {
+    count++;
+    listPlatos[count] = plato.val();
+    listPlatos[count].$id = plato.key();
+
+    mandaPlatoId = listPlatos.filter(Boolean);
+      
+    console.log('Listado de platos');
+
 });
 
-Menu_categorias.getCategorias().then(function(categorias){
-    $scope.categorias = categorias;
-    console.log($scope.categorias);
-    $ionicLoading.hide();
-  }
-)
+
+$timeout(function(){
+  $ionicLoading.hide();
+  $scope.categorias = mandaPlatoId;
+}, 1500);
+
+// Menu_categorias.getCategorias().then(
+//   function(categorias){
+//     $scope.categorias = categorias;
+//     $ionicLoading.hide();
+//   }
+// )
 
   
 // $ionicLoading.show({
@@ -205,8 +281,8 @@ Menu_categorias.getCategorias().then(function(categorias){
 
     localStorageService.set('idCategoria', idCategoria);
 
-    $ionicHistory.clearHistory();
-    $ionicHistory.clearCache();
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
     $state.go('app.platos');
     //$location.url('/app/platos');
   };
@@ -241,6 +317,7 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
         
     //       console.log('Listado de platos');
     //       console.log($scope.platos);
+        
 
     //   });
 
@@ -255,6 +332,7 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
 
     Platos.getPlatos().then(
       function(platos){
+
 
          PlatoId.getPlatoId().then(function(platoId){
           $scope.platos = platoId;
@@ -287,8 +365,8 @@ app.controller('PlatosCtrl', function($scope, $location, localStorageService, $i
     console.log('ID Plato Seleccionado: '+ idPlato);
     localStorageService.set('idPlato', idPlato);
 
-    $ionicHistory.clearHistory();
-    $ionicHistory.clearCache();
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
     $state.go('app.platoSeleccionado');
 
 
@@ -418,8 +496,8 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     count++;
     localStorageService.set('count', count);
 
-    $ionicHistory.clearHistory();
-    $ionicHistory.clearCache();
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
     $state.go('app.resumen');
      //$location.path('app/resumen');
     }
@@ -467,8 +545,8 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
    // función para realizar un nuevo pedido en la mesa actual
     $scope.otroPedido = function(){
       //$location.url('/app/menuCategorias');
-      $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
+      // $ionicHistory.clearHistory();
+      // $ionicHistory.clearCache();
 
       $state.go('app.menuCategorias');
     };
@@ -492,15 +570,16 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
 
     $scope.miPedidoFianal.mesa = mesa;
 
-
     Pedidos.$add($scope.miPedidoFianal);
 
     // ciclo para eliminar los datos del local storage
     for (var i = 0; i <= count; i++) {
       localStorageService.remove('idCategoria', 'idPlato', 'pedido'+i);
+
     };
 
-    localStorageService.set('count', 1)
+    localStorageService.set('count', 1);
+
 
 
   };

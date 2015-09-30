@@ -2,18 +2,32 @@ var app = angular.module('tucocinaApp.services', ['LocalStorageModule']);
 
 
 // creo un array con las categorias de la base de datos
-app.factory("Menu_categorias", function($firebaseArray, $q, $timeout) {
+app.factory("Menu_categorias", function($firebaseArray, $q, $timeout, localStorageService) {
 
 
 	var getCategorias = function(){
 		var deferred = $q.defer();
 
 		$timeout(function(){
-			var categorias = new Firebase("https://tucocina.firebaseio.com/categorias");
-			var mandaCategorias = $firebaseArray(categorias);
-			deferred.resolve(mandaCategorias);
+			var id = localStorageService.get('codigoRestaurante');
+			var mandaPlatoId = null;
+		    var count = 0;
+		    var listPlatos = [];
 
-		}, 1500);
+			var categorias = new Firebase("https://tucocina.firebaseio.com/categorias");
+			categorias.orderByChild("id_restaurante").equalTo(id).on("child_added", function(plato) {
+				count++;
+	            listPlatos[count] = plato.val();
+	            listPlatos[count].$id = plato.key();
+
+	            mandaPlatoId = listPlatos.filter(Boolean);
+		        
+		        console.log('Listado de platos');
+			});
+			// var mandaCategorias = $firebaseArray(categorias);
+			deferred.resolve(mandaPlatoId);
+
+		}, 2000);
 		return deferred.promise;
 	};
 
