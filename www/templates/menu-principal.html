@@ -88,10 +88,11 @@
         </div>
 
         <!-- comienza carousel producto destacados -->
-        <div  class="carousel" ng-controller="mainSlider" class="col col-100">
+        <div  class="carousel" ng-controller="MenuPrincipalCtrl" class="col col-100">
           <ion-slide-box on-slide-changed="slideChanged(index)" auto-play="true" does-continue="true">
-                  <ion-slide ng-repeat="slide in slides">
+                  <ion-slide ng-repeat="slide in sliders">
                     <img class="slider-img" ng-src="http://tucocinavirtual.com/test/uploads/promo/{{slide.imagen_promo}}" alt="">  
+                    <!-- <img class="slider-img" ng-src="{{slide.image}}" alt="">   -->
                   </ion-slide>
         </ion-slide-box>
         </div>

@@ -52,7 +52,6 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   //$scope.pin = 0;
   // almaceno el código del restaurante en el local storage
 
-
    // An alert dialog
    $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
@@ -68,6 +67,8 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   $scope.restauranteSelecionado = null;
 
   $scope.saveCodigoRestaurante = function(){
+
+  localStorageService.set('sliders', null);
 
     $scope.loadingIndicator = $ionicLoading.show({
       content: 'Loading Data',
@@ -96,8 +97,14 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
         restSeleccionado[0].$id = rest.key();
 
         // mandaPlatoId = listPlatos.filter(Boolean);
+
+
       });
 
+    
+
+
+     // traigo las imagenes de ese restaurantes
 
       // asigno lo que deja la funcion al scope
       $timeout(function(){
@@ -110,6 +117,22 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
           $scope.showAlert();
 
         }else{
+
+        var listSlider = [];
+        var count = 0;
+        var img_promos = new Firebase("https://tucocina.firebaseio.com/img_promos");
+        // $scope.slides = $firebaseArray(img_promos);
+        img_promos.orderByChild("id_user").equalTo( $scope.restauranteSelecionado[0].id_user).on("child_added", function(imagen) {
+         count++;
+          listSlider[count] = imagen.val();
+         var sliders = listSlider.filter(Boolean);
+
+         console.log(sliders);
+
+         localStorageService.set('sliders', sliders);
+
+        });
+
           localStorageService.set('idUser', $scope.restauranteSelecionado[0].id_user);
           $ionicLoading.hide();
           $state.go('app.mesa');
@@ -174,8 +197,13 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 
 
 // controlador para gestionar el menu principal de la app
-app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias, $ionicHistory, $state){
+app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias, $ionicHistory, $state, localStorageService){
   
+  // sliders 
+  $scope.sliders = localStorageService.get('sliders');
+
+
+
   // vamos a menu-categorias.html
   $scope.verMenu = function(){
     // $ionicHistory.clearHistory();
