@@ -122,12 +122,12 @@
 						    Adicionales
 						  </div>
 						  <div class="item item-text-wrap item-height">
-	 							<ul class="list flex-wrap">
+	 							<ul id="checkAdicionales" class="list flex-wrap">
 	 									<li ng-repeat="adicional in adicionalesPlato" class="centrado adicional-item">
 											<label class="checkbox">
-											<input type="checkbox" value="">
+												<input type="checkbox" value="{{adicional.nombreAdicional}}">
 											</label>
-											<p class="centrado">{{adicional.nombreAdicional}}</p> 
+											<!-- <p class="centrado">{{adicional.nombreAdicional}}</p>  -->
 											<p class="centrado">{{adicional.valor | currency : "$" : 0}}</p>
 
 										</li>

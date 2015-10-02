@@ -97,8 +97,6 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
         restSeleccionado[0].$id = rest.key();
 
         // mandaPlatoId = listPlatos.filter(Boolean);
-
-
       });
 
     
@@ -482,17 +480,6 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     // creo un objeto con el pedido para almacenarlo en el localstorage
     var count = localStorageService.get('count'); //contador para contar la cantidad de pedidos de la mesa
 
-    var pedido = {
-      plato: $scope.platoSelect.nombrePlato,
-      precio: $scope.platoSelect.valor,
-      estado: 'en proceso',
-      ingredientes: [$scope.ingredientesPlato],
-      adicionales: [$scope.adicionalesPlato]
-    };
-
-    localStorageService.set('pedido'+count, pedido);
-
-
     // identifico ingredientes
     var divCont = document.getElementById('contieneCheck');
 
@@ -517,8 +504,46 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
     console.log(IngredientesSeleccionados);
 
-    localStorageService.set('ingredientes'+count, IngredientesSeleccionados);
+    // localStorageService.set('ingredientes'+count, IngredientesSeleccionados);
 
+
+    // identifico adicionales
+    divAdicionales = document.getElementById('checkAdicionales');
+    var checkAdicionales = divAdicionales.getElementsByTagName('input');
+    var adicionalesSeleccionados = [];
+
+    for(var i = 0; i < checkAdicionales.length; i++){
+
+      if(checkAdicionales[i].checked == true){
+        console.log('valor de i: '+ i);
+      
+      
+        if(checkAdicionales[i] != null ){
+          console.log(ingrediente);
+          var adicional = checkAdicionales[i].value;
+          adicionalesSeleccionados[i] = adicional;
+        }
+      }
+    }
+     // remueve elementos null o undefined o 0
+    adicionalesSeleccionados = adicionalesSeleccionados.filter(function(e){return e});
+
+    console.log(adicionalesSeleccionados);
+
+    // localStorageService.set('adicionales'+count, adicionalesSeleccionados);
+
+    var mesa = localStorageService.get('numMesa');
+
+    var pedido = {
+      mesa: mesa,
+      plato: $scope.platoSelect.nombrePlato,
+      precio: $scope.platoSelect.valor,
+      estado: 'en proceso',
+      ingredientes: IngredientesSeleccionados,
+      adicionales:adicionalesSeleccionados
+    };
+
+    localStorageService.set('pedido'+count, pedido);
 
 
     count++;
@@ -588,21 +613,45 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
 
     var count = localStorageService.get('count');
     var pedidoFinal = [];
+    var ingredientesFinal = new Array();
+    var adicionalFinal = new Array();
 
     for (var i = 0; i <= count; i++) {
       pedidoFinal[i] = localStorageService.get('pedido'+i);
+
+      Pedidos.$add(localStorageService.get('pedido'+i));
+      // ingredientesFinal[i] = localStorageService.get('ingredientes'+i);
+      // adicionalFinal[i] = localStorageService.get('adicionales'+i);
+
+      // ingredientesFinal.push(localStorageService.get('ingredientes'+i));
+      // adicionalFinal.push(localStorageService.get('adicionales'+i));
+
     };
 
+
     $scope.miPedidoFianal = pedidoFinal.filter(Boolean);
+    // $scope.miingredientesFinal = ingredientesFinal.filter(Boolean);
+    // $scope.miadicionalFinal = adicionalFinal.filter(Boolean);
+
     console.log($scope.miPedidoFianal);
+    // console.log( $scope.miingredientesFinal);
+    // console.log($scope.miadicionalFinal);
 
-    $scope.miPedidoFianal.mesa = mesa;
+    // $scope.miPedidoFianal.mesa = mesa;
 
-    Pedidos.$add($scope.miPedidoFianal);
+    
+
+    // Pedidos.$add({
+    //   mesa: mesa,
+    //   pedido: $scope.miPedidoFianal,
+    //   ingredientes: $scope.miingredientesFinal,
+    //   adicionales: $scope.miadicionalFinal
+    // });
+      // $scope.miPedidoFianal, $scope.miingredientesFinal, $scope.miadicionalFinal
 
     // ciclo para eliminar los datos del local storage
     for (var i = 0; i <= count; i++) {
-      localStorageService.remove('idCategoria', 'idPlato', 'pedido'+i);
+      localStorageService.remove('idCategoria', 'idPlato', 'pedido'+i, 'ingredientes'+i, 'adicionales'+i);
 
     };
 
