@@ -69,9 +69,20 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   url: '/DelDia',
   views: { 
     'menuContent': {
-      templateUrl : 'templates/del-dia.html'
+      templateUrl : 'templates/del-dia.html',
+      controller: 'del-diaCtrl'
       // ,
       // controller: 'DelDiaCtrl'
+    }
+  }
+})
+
+.state('app.promoSeleccionada', {
+  url: '/promoSeleccionada',
+  views: { 
+    'menuContent': {
+      templateUrl : 'templates/promo-seleccionada.html',
+      controller: 'promoSeleccionadaCtrl'
     }
   }
 })

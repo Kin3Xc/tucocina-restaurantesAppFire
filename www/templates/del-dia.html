@@ -1,1 +1,40 @@
-<h1>plato del día</h1>
+
+<ion-view left-buttons="leftButtons" right-buttons="rightButtons">
+ <ion-content class="content-home" ng-controller="PlatosCtrl">
+	<div class="row">
+    
+        <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+              <i class="icon ion-ios-search placeholder-icon"></i>
+              <input size="4" type="search" placeholder="Buscar platos">
+          </label>
+          <button class="button button-clear">
+              Cancelar
+          </button>
+        </div>
+      
+  </div>
+<div class="row columna">
+    <div class="col col-100 platos-list">
+      <div ng-click="pedirPlatoPromo(promo.$id)" class="list contienePlatos" ng-repeat="promo in promos | filter:'Plato del dia'">
+          <a class=" item item-thumbnail-left soloRadius">
+            <img style="width:150px" ng-src="http://tucocinavirtual.com/test/uploads/{{ promo.imagen }}">
+            <h2>{{promo.nombrePlato}}
+            </h2>
+            <span style="font-size:12px;margin-top:136px">Descripción:</span>
+            <p>{{promo.descripcion}}
+
+            <div class="item-info" style="float:right">
+              <p class="plato-precio">{{promo.valor | currency : "$" : 0 }}</p>
+            </div>
+            </p>
+            <!-- <p>{{plato.idCategoria.nombreCategoria}}</p> -->
+          </a>
+      </div>
+      </div>
+</div>
+
+
+
+ </ion-content>
+</ion-view>

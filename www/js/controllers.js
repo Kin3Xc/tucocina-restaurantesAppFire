@@ -662,3 +662,210 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
   };
 
 });
+
+
+
+
+
+
+
+
+
+
+app.controller('del-diaCtrl', function($scope, $firebaseArray, localStorageService, $timeout, $ionicLoading, $state){
+  
+  // Setup the loader
+  $ionicLoading.show({
+    content: 'Loading',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
+  });
+
+
+  var id_user = localStorageService.get('idUser');
+
+
+  var count = 0;
+  var listPromo = [];
+
+  var promos = new Firebase("https://tucocina.firebaseio.com/platos");
+    promos.orderByChild("id_user").equalTo(id_user).on("child_added", function(promo) {
+    count++;
+    listPromo[count] = promo.val();
+    listPromo[count].$id = promo.key();
+   });
+
+  $timeout(function(){
+    $scope.promos = listPromo.filter(Boolean);
+    console.log($scope.promos);
+     $ionicLoading.hide();
+  },1500);
+
+  //funcion para mostrara la visata y la info del plato seleccionado por el usuario
+  $scope.pedirPlatoPromo = function(idPlato){
+    console.log('ID Plato Seleccionado: '+ idPlato);
+    localStorageService.set('idPlato', idPlato);
+
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
+    $state.go('app.platoSeleccionado');
+
+
+    // $location.url('/app/plato-seleccionado');
+
+
+  };
+
+});
+
+
+
+
+app.controller('promoSeleccionadaCtrl', function($scope, $location, localStorageService, Pedidos, $ionicHistory, $state){
+
+  var id = localStorageService.get('idPlato');
+
+  var plato = new Firebase("https://tucocina.firebaseio.com/platos/"+id).once('value', function(data){
+    $scope.platoSelect = data.val();
+    console.log($scope.platoSelect);
+  });
+
+  //ingredientes de un plato
+  var count = 0;
+  var ingredientes = [];
+
+  var ingre = new Firebase("https://tucocina.firebaseio.com/ingredientes/");
+  ingre.orderByChild("idPlato").equalTo(id).on("child_added", function(ingrediente) {
+    count++;
+    ingredientes[count] = ingrediente.val();
+    ingredientes[count].$id = ingrediente.key();
+    $scope.ingredientesPlato = ingredientes.filter(Boolean);
+
+    
+    // console.log('Listado de ingredientes');
+    // console.log($scope.ingredientesPlato);
+
+  });
+   
+  // adicionales de un plato
+  var count = 0;
+  var adicionales = [];
+
+  var adi = new Firebase("https://tucocina.firebaseio.com/adicionales/");
+  adi.orderByChild("idPlato").equalTo(id).on("child_added", function(adicional) {
+    count++;
+    adicionales[count] = adicional.val();
+    adicionales[count].$id = adicional.key();
+    $scope.adicionalesPlato = adicionales.filter(Boolean);
+
+
+    // console.log('Listado de adicionales');
+    // console.log($scope.adicionalesPlato);
+
+  });
+
+
+  //regresa los pedidos de una sola mesa
+  var count = 0;
+  var mesaActual = [];
+
+  var numMesa = localStorageService.get('numMesa');
+  var miMesa = new Firebase("https://tucocina.firebaseio.com/pedidos/");
+  miMesa.orderByChild("mesa").equalTo(numMesa).on("child_added", function(mesa) {
+    count++;
+    mesaActual[count] = mesa.val();
+    //console.log(mesaActual);
+    // mesaActual[count].$id = mesa.key();
+    $scope.pedidosMesa = mesaActual.filter(Boolean);
+
+    // console.log('Listado de platos de la mesa');
+    // console.log($scope.pedidosMesa);
+
+  });
+
+
+  //función para ver el resumen del pedido
+  $scope.verResumen = function(){
+
+    // creo un objeto con el pedido para almacenarlo en el localstorage
+    var count = localStorageService.get('count'); //contador para contar la cantidad de pedidos de la mesa
+
+    // identifico ingredientes
+    var divCont = document.getElementById('contieneCheck');
+
+    var checkIngredientes = divCont.getElementsByTagName('input');
+    var IngredientesSeleccionados = [];
+
+    for(var i = 0; i < checkIngredientes.length; i++){
+
+      if(checkIngredientes[i].checked == true){
+        console.log('valor de i: '+ i);
+      
+      
+        if(checkIngredientes[i] != null ){
+          console.log(ingrediente);
+          var ingrediente = checkIngredientes[i].value;
+          IngredientesSeleccionados[i] = ingrediente;
+        }
+      }
+    }
+    // remueve elementos null o undefined o 0
+    IngredientesSeleccionados = IngredientesSeleccionados.filter(function(e){return e});
+
+    console.log(IngredientesSeleccionados);
+
+    // localStorageService.set('ingredientes'+count, IngredientesSeleccionados);
+
+
+    // identifico adicionales
+    divAdicionales = document.getElementById('checkAdicionales');
+    var checkAdicionales = divAdicionales.getElementsByTagName('input');
+    var adicionalesSeleccionados = [];
+
+    for(var i = 0; i < checkAdicionales.length; i++){
+
+      if(checkAdicionales[i].checked == true){
+        console.log('valor de i: '+ i);
+      
+      
+        if(checkAdicionales[i] != null ){
+          console.log(ingrediente);
+          var adicional = checkAdicionales[i].value;
+          adicionalesSeleccionados[i] = adicional;
+        }
+      }
+    }
+     // remueve elementos null o undefined o 0
+    adicionalesSeleccionados = adicionalesSeleccionados.filter(function(e){return e});
+
+    console.log(adicionalesSeleccionados);
+
+    // localStorageService.set('adicionales'+count, adicionalesSeleccionados);
+
+    var mesa = localStorageService.get('numMesa');
+
+    var pedido = {
+      mesa: mesa,
+      plato: $scope.platoSelect.nombrePlato,
+      precio: $scope.platoSelect.valor,
+      estado: 'en proceso',
+      ingredientes: IngredientesSeleccionados,
+      adicionales:adicionalesSeleccionados
+    };
+
+    localStorageService.set('pedido'+count, pedido);
+
+
+    count++;
+    localStorageService.set('count', count);
+
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.clearCache();
+    $state.go('app.resumen');
+     //$location.path('app/resumen');
+    }
+
+
+});

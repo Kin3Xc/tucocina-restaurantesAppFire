@@ -1,0 +1,69 @@
+ <ion-content class="content-home" style="top:65px;">
+ 	
+
+ 	<div class="row" >
+ 		<div class="col col-100" style="background:lightgrey;border-radius:8px;">
+ 			
+ 			<div class="panel" style="background:white;border-radius:8px;">
+ 				<h2 class="" style="padding-top:10px;padding-left:10px">{{platoSelect.nombrePlato}}</h2>
+ 			
+ 				<div class="centrado">
+ 					<div >
+ 						<img class="plato-img" ng-src="http://tucocinavirtual.com/test/uploads/{{ platoSelect.imagen }}" alt="">		<h5> {{platoSelect.descripcion}}</h5>
+ 					</div>
+ 				</div>	
+ 			
+
+ 				
+ 			<div>
+ 				<h3 class="centrado" style="margin-right:10px;margin-top:10px;">{{platoSelect.valor | currency : "$" : 0}}</h3>
+ 			</div>
+ 						
+<div class="col col-100" style="margin:0 auto;" >
+			<button style="margin-top: -7px;border-radius:10px" ng-click="verResumen()" class="button button-block button-dark centrado">
+			   Agregar al Pedido
+		    </button>
+		</div>
+	 			
+ 			</div>
+			<div class="row" style="color:grey;">
+				<div class="col col-100">
+					<div class="card">
+  						<div class="item item-divider">
+						    Ingredientes
+						 </div>
+						 	<div class="item item-text-wrap">
+	 							<ul id="contieneCheck" class="list flex-wrap">
+	 									<li ng-repeat="ingrediente in ingredientesPlato" class="centrado ingrediente-item" style="background:white">
+	 							  <h3 style="padding-top:8px;margin-bottom: 0px;">{{ingrediente.nombreIngrediente}}</h3>
+	 							  <label class="checkbox">
+				                       <input checked type="checkbox" value="{{ingrediente.nombreIngrediente}}">
+				                     </label>
+				                     
+	 									</li>
+	 							</ul>
+						 	 </div>
+						</div>
+						<div class="card">
+  						<div class="item item-divider">
+						    Adicionales
+						  </div>
+						  <div class="item item-text-wrap item-height">
+	 							<ul id="checkAdicionales" class="list flex-wrap">
+	 									<li ng-repeat="adicional in adicionalesPlato" class="centrado adicional-item">
+											<label class="checkbox">
+												<input type="checkbox" value="{{adicional.nombreAdicional}}">
+											</label>
+											<!-- <p class="centrado">{{adicional.nombreAdicional}}</p>  -->
+											<p class="centrado">{{adicional.valor | currency : "$" : 0}}</p>
+
+										</li>
+	 							</ul>						  	
+						  </div>
+						</div>
+				</div>
+ 			</div>
+ 			
+ 		</div>
+ 	</div>
+ </ion-content>
