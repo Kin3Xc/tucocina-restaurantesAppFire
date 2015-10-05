@@ -1,10 +1,20 @@
-<ion-view view-title="Hamburguesas del Oeste" left-buttons="leftButtons" right-buttons="rightButtons">
+<ion-view view-title="Pedido mesa {{mesa}}" left-buttons="leftButtons" right-buttons="rightButtons">
 
  <ion-content class="content-home">
 
-
-<h1>Tu PEDIDO</h1>
-
+ <div class="row">
+ 	<div class="col col-100">
+ 		<div class="panel" ng-repeat="pedido in pedidosMesa">
+			<div>
+				<h2>Plato</h2>
+				<p>Nombre: {{pedido.plato}}</p>
+				<p>Estado: {{pedido.estado}}</p>
+				<p>Valor: {{pedido.precio}}</p>
+				<br>
+			</div>
+ 		</div>
+ 	</div>
+ </div>
 
 </ion-content>
 </ion-view>

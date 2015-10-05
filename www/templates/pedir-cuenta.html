@@ -1,2 +1,28 @@
-<h1>pedir cuenta</h1>
-<h1>pedir cuenta</h1>
+<ion-view view-title="Tu cuenta" left-buttons="leftButtons" right-buttons="rightButtons">
+
+ <ion-content class="content-home">
+
+ <div class="row">
+ 	<div class="col col-100">
+ 		<div class="panel" ng-repeat="pedido in pedidosMesa">
+			<div>
+				<h2>Plato</h2>
+				<p>Nombre: {{pedido.plato}}</p>
+				<p>Estado: {{pedido.estado}}</p>
+				<p>Valor: {{pedido.precio}}</p>
+				<br>
+			</div>
+ 		</div>
+
+ 		<div class="total">
+ 			<h1>TOTAL: {{total}}</h1>
+ 		</div>
+
+ 		<button ng-click="pedirCuenta()" class="button button-block button-stable">
+ 			Pedir cuenta
+		</button>
+ 	</div>
+ </div>
+
+</ion-content>
+</ion-view>

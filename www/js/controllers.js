@@ -479,6 +479,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
     // creo un objeto con el pedido para almacenarlo en el localstorage
     var count = localStorageService.get('count'); //contador para contar la cantidad de pedidos de la mesa
+    var idUser = localStorageService.get('idUser');
 
     // identifico ingredientes
     var divCont = document.getElementById('contieneCheck');
@@ -535,6 +536,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     var mesa = localStorageService.get('numMesa');
 
     var pedido = {
+      id_user: idUser,
       mesa: mesa,
       plato: $scope.platoSelect.nombrePlato,
       precio: $scope.platoSelect.valor,
@@ -867,5 +869,64 @@ app.controller('promoSeleccionadaCtrl', function($scope, $location, localStorage
      //$location.path('app/resumen');
     }
 
+
+});
+
+
+
+
+
+
+
+// controlador para traer el pedido actual de una mesa del restaurante
+app.controller('TuPedidoCtrl', function($scope, localStorageService){
+
+  //regresa los pedidos de la mesa actual mesa
+  var count = 0;
+  var mesaActual = [];
+
+  var numMesa = localStorageService.get('numMesa');
+  $scope.mesa = numMesa;
+
+  var miMesa = new Firebase("https://tucocina.firebaseio.com/pedidos/");
+  miMesa.orderByChild("mesa").equalTo(numMesa).on("child_added", function(mesa) {
+    count++;
+    mesaActual[count] = mesa.val();
+    // mesaActual[count].$id = mesa.key();
+    $scope.pedidosMesa = mesaActual.filter(Boolean);
+
+  });
+
+});
+
+
+
+
+// controllador para la funcionalidad de pedir cuenta al mesero
+app.controller('pedirCuentaCtrl', function($scope, localStorageService){
+  $scope.total = 0;
+
+    //regresa los pedidos de la mesa actual mesa
+  var count = 0;
+  var mesaActual = [];
+
+  var numMesa = localStorageService.get('numMesa');
+  $scope.mesa = numMesa;
+
+  var miMesa = new Firebase("https://tucocina.firebaseio.com/pedidos/");
+  miMesa.orderByChild("mesa").equalTo(numMesa).on("child_added", function(mesa) {
+    mesaActual[count] = mesa.val();
+    // mesaActual[count].$id = mesa.key();
+    $scope.pedidosMesa = mesaActual.filter(Boolean);
+    console.log($scope.pedidosMesa[count].precio);
+    $scope.total = $scope.total + parseInt($scope.pedidosMesa[count].precio);
+    count++;
+
+  });
+
+
+  $scope.pedirCuenta = function(){
+    console.log('Hola mundo xD');
+  }
 
 });

@@ -91,7 +91,8 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   url: '/pedirCuenta',
   views: {
     'menuContent': {
-      templateUrl: 'templates/pedir-cuenta.html'
+      templateUrl: 'templates/pedir-cuenta.html',
+      controller: 'pedirCuentaCtrl'
     }
   }
 })
@@ -109,9 +110,8 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   url: '/tuPedido',
   views: {
     'menuContent': {
-      templateUrl: 'templates/tu-pedido.html'
-      // ,
-      // controller: 'TuPedidoCtrl'
+      templateUrl: 'templates/tu-pedido.html',
+      controller: 'TuPedidoCtrl'
     }
   }
 })
