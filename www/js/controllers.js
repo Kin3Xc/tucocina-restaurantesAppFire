@@ -226,9 +226,13 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
   }
 
 
-  //vamos a pedir-cuenta.html
-  $scope.verPedirCuenta = function(){
-    $location.url('/app/pedirCuenta');
+  // //vamos a pedir-cuenta.html
+  // $scope.verPedirCuenta = function(){
+  //   $location.url('/app/pedirCuenta');
+  // }
+
+  $scope.pedirCuenta = function(){
+    $scope.cuenta();
   }
 
   // $scope.verLlamarMesero = function(){
@@ -250,6 +254,17 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
    });
  };
 
+    // An alert dialog
+ $scope.cinfirmaCuenta = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'En un momento el mesero te llevará tu cuenta.'
+   });
+   alertPopup.then(function(res) {
+     console.log('Confirmación de llamada al mesero');
+   });
+ };
+
 
   // A confirm dialog
  $scope.mesero = function() {
@@ -261,6 +276,22 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
      if(res) {
        console.log('Dijo que si');
        $scope.confirmaMesero();
+     } else {
+       console.log('Dijo que no');
+     }
+   });
+ };
+
+   // A confirm dialog
+ $scope.cuenta = function() {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Confirmar!',
+     template: 'Realmente deseas pedir tu cuenta?'
+   });
+   confirmPopup.then(function(res) {
+     if(res) {
+       console.log('Dijo que si');
+       $scope.cinfirmaCuenta();
      } else {
        console.log('Dijo que no');
      }
