@@ -1,5 +1,13 @@
 /* Empty. Add your own CSS if you like */
-
+/* Para button */
+.btn-right{
+    position: absolute;
+    right: 5px;
+}
+.btn-left{
+    position: absolute;
+    left: 5px;
+}
 /*para centrar en la mitad boton*/
 .center{
     display: -webkit-box;
@@ -323,12 +331,9 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 }
 
 .panel{
-    margin-top: 45px;
+    margin-top: 20px;
 }
 /*<<<-- ItemPedidos  -->>>*/
 .ItemPedidos{
 
-}
-.barra-Footer{
-    position: fixed;
 }

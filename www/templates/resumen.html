@@ -8,14 +8,22 @@
                     <h2>{{pedido.plato}}</h2>
                     <i class="icon ion-email"></i>
                     <p>Estado del Plato :</p>
-                    <p> {{pedido.estado}}</p>
+                    <p>{{pedido.estado}}</p>
                     <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
                 </a>
             </div>
         </div>
     </div>
-    <div class="bar bar-footer bar-energized barra-Footer">
+    <!-- <div class="bar bar-footer bar-energized barra-Footer">
         <button ng-click="otroPedido()" class="button button-clear"><i class="ion-chevron-left"></i>Pedir otro plato</button>
         <button ng-click="enviarPedido()" class="button button-clear">Envíar pedido <i class=" ion-chevron-right"></i></button>
-    </div>
+    </div> -->
 </ion-content>
+<ion-footer-bar class="bar bar-energized">
+  <div class="buttons btn-left">
+    <button ng-click="otroPedido()" class="button button-clear"><i class="ion-chevron-left"></i>Pedir otro plato</button>
+  </div>
+  <div class="buttons btn-right">
+    <button ng-click="enviarPedido()" class="button button-clear item-button-right">Envíar pedido <i class=" ion-chevron-right"></i></button>
+  </div>
+</ion-footer-bar>
