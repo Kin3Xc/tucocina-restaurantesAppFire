@@ -52,6 +52,7 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   //$scope.pin = 0;
   // almaceno el código del restaurante en el local storage
 
+
    // An alert dialog
    $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
@@ -67,7 +68,9 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   $scope.restauranteSelecionado = null;
 
   $scope.saveCodigoRestaurante = function(){
-
+  // limpio el valor del pedido del localstorage
+  localStorageService.set('valorPedido', null);
+  
   localStorageService.set('sliders', null);
 
     $scope.loadingIndicator = $ionicLoading.show({
@@ -674,8 +677,18 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
     localStorageService.set('count', 1);
 
 
+    $state.go('app.menuPrincipal');
 
   };
+
+
+
+
+  // funcion para eliminar un plato del pedido
+  $scope.eliminaPlato = function(){
+    console.log('Elimina plato');
+  }
+
 
 });
 

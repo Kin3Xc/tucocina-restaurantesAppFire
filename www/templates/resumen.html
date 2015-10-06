@@ -1,3 +1,4 @@
+
 <ion-content class="content-home">
     <div class="row columna">
         <div class="col col-100">
@@ -24,7 +25,7 @@
                                 <p>Estado del Plato :</p>
                                 <p> {{pedido.estado}}</p>
                                 <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
-
+                                <button ng-click="eliminaPlato()" class="button button-assertive">Elimnar del pedido</button>
                             </a>
                         </div>
                     </li>
