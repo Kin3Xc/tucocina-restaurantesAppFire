@@ -540,6 +540,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
       mesa: mesa,
       plato: $scope.platoSelect.nombrePlato,
       precio: $scope.platoSelect.valor,
+      imagen: $scope.platoSelect.imagen,
       estado: 'en proceso',
       ingredientes: IngredientesSeleccionados,
       adicionales:adicionalesSeleccionados

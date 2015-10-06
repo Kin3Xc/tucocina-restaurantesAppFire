@@ -6,6 +6,7 @@
  			<div class="panel">
  				<div ng-repeat="pedido in misPedidos">
 	 				<h2>Plato seleccionado</h2>
+	 				<img ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}" alt="">
 	 				<p>Nombre: {{pedido.plato}}</p>
 	 				<p>Estado: {{pedido.estado}}</p>
 	 				<p>Valor: {{pedido.precio}}</p>
