@@ -1,45 +1,21 @@
 
 <ion-content class="content-home">
-    <div class="row columna">
-        <div class="col col-100">
-            <div class="panel">
-                <div class="Pedido-btn row">
-                    <div class="col-50">
-                        <button ng-click="otroPedido()" class="button button-balanced">
-                            Pedir otro plato
-                        </button>
-                    </div>
-                    <div class="col-50">
-                        <button ng-click="enviarPedido()" class="button button-block button-balanced">
-                            Envíar pedido
-                        </button>
-                    </div>
-                </div>
-                <ul>
-                    <li ng-repeat="pedido in misPedidos">
-                        <div class="list">
-                            <a class="item item-thumbnail-left" href="#">
-                                <img ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}">
-                                <h2>{{pedido.plato}}</h2>
-                                <i class="icon ion-email"></i>
-                                <p>Estado del Plato :</p>
-                                <p> {{pedido.estado}}</p>
-                                <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
-                                <button ng-click="eliminaPlato()" class="button button-assertive">Elimnar del pedido</button>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+    <div class="row columna panel">
+        <div class="col col-100 platos-list">
+            <div ng-click="pedirPlato(plato.$id)" class="list contienePlatos" ng-repeat="pedido in misPedidos">
+                <a class="item item-thumbnail-left soloRadius">
+                    <img style="width:150px" ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}">
+                    <h2>{{pedido.plato}}</h2>
+                    <i class="icon ion-email"></i>
+                    <p>Estado del Plato :</p>
+                    <p> {{pedido.estado}}</p>
+                    <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
+                </a>
             </div>
-            <div class="total">
-                <h1>TOTAL: {{total | currency : "$" : 0}}</h1>
-            </div>
-            <!-- <button ng-click="otroPedido()" class="button button-block button-stable">
-            Pedir otro plato
-        </button>
-        <button ng-click="enviarPedido()" class="button button-block button-stable">
-        Envíar pedido
-    </button> -->
-</div>
-</div>
+        </div>
+    </div>
+    <div class="bar bar-footer bar-energized barra-Footer">
+        <button ng-click="otroPedido()" class="button button-clear"><i class="ion-chevron-left"></i>Pedir otro plato</button>
+        <button ng-click="enviarPedido()" class="button button-clear">Envíar pedido <i class=" ion-chevron-right"></i></button>
+    </div>
 </ion-content>

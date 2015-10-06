@@ -2,7 +2,7 @@
 
 /*para centrar en la mitad boton*/
 .center{
-  display: -webkit-box;
+    display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -36,33 +36,33 @@
 
 /*centra placeholder*/
 ::-webkit-input-placeholder {
- font-size: 14px;
- color: #d0cdfa;
- text-transform: uppercase;
- text-transform: uppercase;
- text-align: center;
- font-weight: bold;
+    font-size: 14px;
+    color: #d0cdfa;
+    text-transform: uppercase;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
 }
 :-moz-placeholder { /* older Firefox*/
- font-size:14px;
- color: #d0cdfa;
- text-transform: uppercase;
- text-align: center;
- font-weight: bold;
+    font-size:14px;
+    color: #d0cdfa;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
 }
 ::-moz-placeholder { /* Firefox 19+ */
- font-size: 14px;
- color: #d0cdfa;
- text-transform: uppercase;
- text-align: center;
- font-weight: bold;
+    font-size: 14px;
+    color: #d0cdfa;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
 }
 :-ms-input-placeholder {
- font-size: 14px;
- color: #d0cdfa;
- text-transform: uppercase;
- text-align: center;
- font-weight: bold;
+    font-size: 14px;
+    color: #d0cdfa;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
 }
 
 
@@ -111,7 +111,7 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
     border-radius: 8px;
     margin-left: 2px;
     margin-bottom: 6px;
-     border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     font-size:12px;
 }
@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 }
 
 .bordes-abajo{
-        margin-top: 4px;
+    margin-top: 4px;
     /* border-bottom-left-radius: 20px; */
     /* border-bottom-right-radius: 7px; */
     border-radius: 13px;
@@ -174,10 +174,10 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
     border-top-left-radius:10px;
 }
 /*.border-derecha{
-    border-top-right-radius: 10px;
-    border-radius: 8px;
-    margin-left: 2px;
-    margin-bottom: 2px;
+border-top-right-radius: 10px;
+border-radius: 8px;
+margin-left: 2px;
+margin-bottom: 2px;
 }*/
 
 .cubreCategorias{
@@ -191,7 +191,7 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .bar.bar-stable .title {
     color: white;
- /*   background-color: #FED136;*/
+    /*   background-color: #FED136;*/
     font-size: 1.6em;
 }
 
@@ -228,7 +228,7 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 }
 
 .designInputButton{
-   border-radius:10px;
+    border-radius:10px;
 }
 
 .taglineAppPaRestaurantes{
@@ -272,7 +272,7 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 
 .item, .item h1, .item h2, .item h3, .item h4, .item h5, .item h6, .item p, .item-content, .item-content h1, .item-content h2, .item-content h3, .item-content h4, .item-content h5, .item-content h6, .item-content p {
 
-     white-space: normal !important;
+    white-space: normal !important;
 }
 /* View template plato-seleccionado*/
 
@@ -307,21 +307,28 @@ div.title.title-center.header-item{ font-size: 1.5em; }
     color: #52C128 !important;
 }
 .slider {
-  height: 100%;
+    height: 100%;
 }
 .slider-slide {
-  color: #000;
-  background-color: #fff;
-  text-align: center;
-  margin-top: 10px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
 }
 .slider-img{
-width: 100%;
-height: 150px;
+    width: 100%;
+    height: 150px;
 }
 
 .panel{
-    margin-top: 30px;
+    margin-top: 45px;
+}
+/*<<<-- ItemPedidos  -->>>*/
+.ItemPedidos{
+
+}
+.barra-Footer{
+    position: fixed;
 }
