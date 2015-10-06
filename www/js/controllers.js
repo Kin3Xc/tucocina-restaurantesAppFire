@@ -545,6 +545,16 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
       adicionales:adicionalesSeleccionados
     };
 
+    var valorPedido = localStorageService.get('valorPedido');
+
+    if (valorPedido != null) {
+      localStorageService.set('valorPedido', parseInt($scope.platoSelect.valor)+parseInt(valorPedido));
+    }else{
+      
+      localStorageService.set('valorPedido', parseInt($scope.platoSelect.valor));
+    }
+
+
     localStorageService.set('pedido'+count, pedido);
 
 
@@ -573,6 +583,8 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
 
 // controlador para mostrar el resumen de pedidos de la mesaActual
 app.controller('ResumenCtrl', function($scope, $location, localStorageService, Pedidos, $ionicLoading, $timeout, $ionicHistory, $state){
+  $scope.total = localStorageService.get('valorPedido');
+
    // Setup the loader
     $ionicLoading.show({
       content: 'Loading',
@@ -590,6 +602,7 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
 
       for (var i = 0; i <= count; i++) {
         pedidosMesaActual[i] = localStorageService.get('pedido'+i);
+
       };
 
       $scope.misPedidos = pedidosMesaActual.filter(Boolean);
