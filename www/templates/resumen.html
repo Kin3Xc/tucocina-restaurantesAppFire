@@ -1,30 +1,34 @@
- <ion-content class="content-home">
- 	<div class="row columna">
- 		<div class="col col-100">
- 			<br>
- 			<br>
- 			<div class="panel">
- 				<div ng-repeat="pedido in misPedidos">
-	 				<h2>Plato seleccionado</h2>
-	 				<img ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}" alt="">
-	 				<p>Nombre: {{pedido.plato}}</p>
-	 				<p>Estado: {{pedido.estado}}</p>
-	 				<p>Valor: {{pedido.precio}}</p>
-	 				<button ng-click="eliminaPlato()" class="button button-assertive">Elimnar del pedido</button>
- 				</div>
- 			</div>
-			
-			<div class="total">
- 				<h1>TOTAL: {{total}}</h1>
-	 		</div>
 
-
- 			<button ng-click="otroPedido()" class="button button-block button-stable">
-			  Pedir otro plato
-			</button>
-			<button ng-click="enviarPedido()" class="button button-block button-stable">
-			  Envíar pedido
-			</button>
- 		</div>
- 	</div>
- </ion-content>
+<ion-content class="content-home">
+    <div class="row columna">
+        <div class="col col-100">
+            <br>
+            <br>
+            <div class="panel">
+                <ul ng-repeat="pedido in misPedidos">
+                    <li>
+                        <div class="list">
+                            <a class="item item-thumbnail-left" href="#">
+                                <img src="cover.jpg">
+                                <h2>{{pedido.plato}}</h2>
+                                <p>Estado del Plato :</p>
+                                <p> {{pedido.estado}}</p>
+                                <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
+                                <button ng-click="eliminaPlato()" class="button button-assertive">Elimnar del pedido</button>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+        <div class="total">
+            <h1>TOTAL: {{total}}</h1>
+        </div>
+        <button ng-click="otroPedido()" class="button button-block button-stable">
+            Pedir otro plato
+        </button>
+        <button ng-click="enviarPedido()" class="button button-block button-stable">
+            Envíar pedido
+        </button>
+    </div>
+</div>
+</ion-content>
