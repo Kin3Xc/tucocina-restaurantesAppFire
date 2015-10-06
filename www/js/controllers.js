@@ -70,7 +70,7 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   $scope.saveCodigoRestaurante = function(){
   // limpio el valor del pedido del localstorage
   localStorageService.set('valorPedido', null);
-  
+
   localStorageService.set('sliders', null);
 
     $scope.loadingIndicator = $ionicLoading.show({
@@ -198,7 +198,7 @@ app.controller('CategoriasCtrl', function($scope, localStorageService, Menu_cate
 
 
 // controlador para gestionar el menu principal de la app
-app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias, $ionicHistory, $state, localStorageService){
+app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias, $ionicHistory, $state, localStorageService, $ionicPopup){
   
   // sliders 
   $scope.sliders = localStorageService.get('sliders');
@@ -231,9 +231,43 @@ app.controller('MenuPrincipalCtrl', function($scope, $location, Menu_categorias,
     $location.url('/app/pedirCuenta');
   }
 
-  $scope.verLlamarMesero = function(){
-    $location.url('/app/llamar-mesero');
+  // $scope.verLlamarMesero = function(){
+  //   $location.url('/app/llamar-mesero');
+  // }
+
+  $scope.llamarMesero = function(){
+    $scope.mesero();
   }
+
+   // An alert dialog
+ $scope.confirmaMesero = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'Pronto tu mesero llegará a tu mesa'
+   });
+   alertPopup.then(function(res) {
+     console.log('Confirmación de llamada al mesero');
+   });
+ };
+
+
+  // A confirm dialog
+ $scope.mesero = function() {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Confirmar!',
+     template: 'Estas seguro que quieres llamar al mesero?'
+   });
+   confirmPopup.then(function(res) {
+     if(res) {
+       console.log('Dijo que si');
+       $scope.confirmaMesero();
+     } else {
+       console.log('Dijo que no');
+     }
+   });
+ };
+
+
 });
 
 
@@ -539,6 +573,7 @@ app.controller('platoSeleccionadoCtrl', function($scope, $location, localStorage
     var mesa = localStorageService.get('numMesa');
 
     var pedido = {
+      id: localStorageService.get('count'),
       id_user: idUser,
       mesa: mesa,
       plato: $scope.platoSelect.nombrePlato,
@@ -685,11 +720,10 @@ app.controller('ResumenCtrl', function($scope, $location, localStorageService, P
 
 
   // funcion para eliminar un plato del pedido
-  $scope.eliminaPlato = function(){
+  $scope.eliminaPlato = function(id){
     console.log('Elimina plato');
+
   }
-
-
 });
 
 
@@ -930,7 +964,7 @@ app.controller('TuPedidoCtrl', function($scope, localStorageService){
 
 
 // controllador para la funcionalidad de pedir cuenta al mesero
-app.controller('pedirCuentaCtrl', function($scope, localStorageService){
+app.controller('pedirCuentaCtrl', function($scope, localStorageService, $ionicPopup){
   $scope.total = 0;
 
     //regresa los pedidos de la mesa actual mesa
@@ -953,7 +987,51 @@ app.controller('pedirCuentaCtrl', function($scope, localStorageService){
 
 
   $scope.pedirCuenta = function(){
+    $scope.cuenta();
     console.log('Hola mundo xD');
   }
+
+
+   // An alert dialog
+ $scope.cuenta = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Tu cuenta',
+     template: 'Acabas de pedir tu cuenta, en un momento te llegará'
+   });
+   alertPopup.then(function(res) {
+     console.log('Todo va bien');
+   });
+  };
+
+});
+
+
+
+
+
+
+
+
+
+app.controller('llamarMeseroCrtl', function($scope, $ionicPopup){
+
+  $scope.llamarMesero = function(){
+    $scope.mesero();
+  }
+
+   // A confirm dialog
+ $scope.mesero = function() {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Confirmar!',
+     template: 'Estas seguro que quieres llamar al mesero?'
+   });
+   confirmPopup.then(function(res) {
+     if(res) {
+       console.log('Dijo que si');
+     } else {
+       console.log('Dijo que no');
+     }
+   });
+ };
 
 });

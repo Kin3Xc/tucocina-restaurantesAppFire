@@ -101,7 +101,8 @@ angular.module('tucocinaApp', ['ionic', 'tucocinaApp.controllers', 'tucocinaApp.
   url: '/llamar-mesero',
   views: {
     'menuContent': {
-      templateUrl: 'templates/llamar-mesero.html'
+      templateUrl: 'templates/llamar-mesero.html',
+      controller: 'llamarMeseroCrtl'
     }
   }
 })
