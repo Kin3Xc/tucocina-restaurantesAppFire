@@ -50,15 +50,15 @@
  text-align: center;
  font-weight: bold;
 }
-::-moz-placeholder { /* Firefox 19+ */ 
+::-moz-placeholder { /* Firefox 19+ */
  font-size: 14px;
- color: #d0cdfa; 
+ color: #d0cdfa;
  text-transform: uppercase;
  text-align: center;
  font-weight: bold;
-} 
-:-ms-input-placeholder { 
- font-size: 14px; 
+}
+:-ms-input-placeholder {
+ font-size: 14px;
  color: #d0cdfa;
  text-transform: uppercase;
  text-align: center;
@@ -86,9 +86,9 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuPrincipal:hover{
     background: grey;
-    text-decoration: none; 
+    text-decoration: none;
     color: white;
-    text-align: center; 
+    text-align: center;
     height: 80px;
     border:2.9px lightgrey solid;
     border-radius: 8px;
@@ -103,9 +103,9 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuCategorias{
     background: lightgrey ;
-    text-decoration: none; 
+    text-decoration: none;
     color: grey;
-    text-align: center; 
+    text-align: center;
     height: 80px;
     border:.9px white solid;
     border-radius: 8px;
@@ -118,9 +118,9 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuCategorias:hover{
     background: white ;
-    text-decoration: none; 
+    text-decoration: none;
     color: grey;
-    text-align: center; 
+    text-align: center;
     height: 80px;
     border:.9px white solid;
     border-radius: 8px;
@@ -130,13 +130,13 @@ h1, h2, h3, h4, h5, h6{font-family: 'Varela Round', sans-serif;}
 
 .menu-pagina-menuCategoriasBlanco{
     background: white ;
-    text-decoration: none; 
+    text-decoration: none;
     color: grey;
-    text-align: center; 
+    text-align: center;
     height: 80px;
     border:2.5px lightgrey solid;
     border-radius: 8px;
-    
+
     margin-bottom: 6px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -246,7 +246,7 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 .separaPedirCuentaIconos{
     margin-right:5px;
 }
-                                          
+
 
 
 /* comienza menu-categorias.html */
@@ -271,8 +271,8 @@ div.title.title-center.header-item{ font-size: 1.5em; }
 
 
 .item, .item h1, .item h2, .item h3, .item h4, .item h5, .item h6, .item p, .item-content, .item-content h1, .item-content h2, .item-content h3, .item-content h4, .item-content h5, .item-content h6, .item-content p {
-   
-     white-space: normal !important; 
+
+     white-space: normal !important;
 }
 /* View template plato-seleccionado*/
 
@@ -314,11 +314,10 @@ div.title.title-center.header-item{ font-size: 1.5em; }
   background-color: #fff;
   text-align: center;
   margin-top: 10px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
 .slider-img{
 width: 100%;
 height: 150px;
 }
-
