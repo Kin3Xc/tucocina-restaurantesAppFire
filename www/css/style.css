@@ -8,6 +8,13 @@
     position: absolute;
     left: 5px;
 }
+.btn-eliminar{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 30px;
+    color: rgb(237, 9, 78);
+}
 /*para centrar en la mitad boton*/
 .center{
     display: -webkit-box;

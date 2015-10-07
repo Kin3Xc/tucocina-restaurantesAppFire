@@ -6,7 +6,7 @@
                 <a class="item item-thumbnail-left soloRadius">
                     <img style="width:150px" ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}">
                     <h2>{{pedido.plato}}</h2>
-                    <i class="icon ion-email"></i>
+                    <i ng-click="eliminarPedido()"class="ion-close-round btn-eliminar"></i>
                     <p>Estado del Plato :</p>
                     <p>{{pedido.estado}}</p>
                     <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
