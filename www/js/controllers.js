@@ -55,6 +55,87 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
   $scope.leerQR = function(){
      $cordovaBarcodeScanner.scan().then(function(codigo){
       alert(codigo.text);
+
+      // codigo que trae info del restaurante
+      // limpio el valor del pedido del localstorage
+      localStorageService.set('valorPedido', null);
+
+      localStorageService.set('sliders', null);
+
+        $scope.loadingIndicator = $ionicLoading.show({
+          content: 'Loading Data',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 500
+        });
+
+
+
+
+        var codigo = parseInt(codigo.text);
+
+        if (codigo != 0) {
+          localStorageService.set('codigoRestaurante', codigo);
+
+          var restSeleccionado = [];
+
+          //verifico qe ese codigo pertenece a algun restaurante
+          var restID = new Firebase("https://tucocina.firebaseio.com/restaurantes");
+          restID.orderByChild("nit").equalTo(codigo).on("child_added", function(rest) {
+            
+            restSeleccionado[0] = rest.val();
+            restSeleccionado[0].$id = rest.key();
+
+            // mandaPlatoId = listPlatos.filter(Boolean);
+          });
+
+        
+
+
+         // traigo las imagenes de ese restaurantes
+
+          // asigno lo que deja la funcion al scope
+          $timeout(function(){
+            $scope.restauranteSelecionado = restSeleccionado;
+            console.log($scope.restauranteSelecionado);
+            if ($scope.restauranteSelecionado[0] == null) {
+              console.log('NO EXISTE!');
+              $ionicLoading.hide();
+
+              $scope.showAlert();
+
+            }else{
+
+            var listSlider = [];
+            var count = 0;
+            var img_promos = new Firebase("https://tucocina.firebaseio.com/img_promos");
+            // $scope.slides = $firebaseArray(img_promos);
+            img_promos.orderByChild("id_user").equalTo( $scope.restauranteSelecionado[0].id_user).on("child_added", function(imagen) {
+             count++;
+              listSlider[count] = imagen.val();
+             var sliders = listSlider.filter(Boolean);
+
+             console.log(sliders);
+
+             localStorageService.set('sliders', sliders);
+
+            });
+
+              localStorageService.set('idUser', $scope.restauranteSelecionado[0].id_user);
+              $ionicLoading.hide();
+              $state.go('app.mesa');
+            }
+          }, 2500);
+
+          // $ionicHistory.clearHistory();
+          // $ionicHistory.clearCache();
+          //$location.url('/app/mesa');
+        }else{
+          $scope.respuesta_codigo = 'Ingrese el código del restaurante';
+        }
+
+
      }, function(err){
       alert(err);
      });
