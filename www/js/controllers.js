@@ -1,4 +1,4 @@
-var app = angular.module('tucocinaApp.controllers', ['LocalStorageModule']);
+var app = angular.module('tucocinaApp.controllers', ['LocalStorageModule', 'ngCordova']);
 
 
 
@@ -48,10 +48,17 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 // CONTROLADORES DE LA APP
 
 // controlador para la vista home, encargada de recoger el código del restaurante
-app.controller('HomeCtrl', function($scope, localStorageService, $location, $ionicHistory, $state, $ionicLoading, $timeout,  $ionicPopup) {
+app.controller('HomeCtrl', function($scope, localStorageService, $location, $ionicHistory, $state, $ionicLoading, $timeout,  $ionicPopup,  $cordovaBarcodeScanner) {
   //$scope.pin = 0;
   // almaceno el código del restaurante en el local storage
 
+  $scope.leerQR = function(){
+     $cordovaBarcodeScanner.scan().then(function(codigo){
+      alert(codigo.text);
+     }, function(err){
+      alert(err);
+     });
+  }
 
    // An alert dialog
    $scope.showAlert = function() {
