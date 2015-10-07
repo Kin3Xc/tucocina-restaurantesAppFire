@@ -54,7 +54,7 @@ app.controller('HomeCtrl', function($scope, localStorageService, $location, $ion
 
   $scope.leerQR = function(){
      $cordovaBarcodeScanner.scan().then(function(codigo){
-      alert(codigo.text);
+      // alert(codigo.text);
 
       // codigo que trae info del restaurante
       // limpio el valor del pedido del localstorage
@@ -1070,10 +1070,13 @@ app.controller('TuPedidoCtrl', function($scope, localStorageService){
 
   var miMesa = new Firebase("https://tucocina.firebaseio.com/pedidos/");
   miMesa.orderByChild("mesa").equalTo(numMesa).on("child_added", function(mesa) {
-    count++;
     mesaActual[count] = mesa.val();
     // mesaActual[count].$id = mesa.key();
     $scope.pedidosMesa = mesaActual.filter(Boolean);
+
+    $scope.total += parseInt($scope.pedidosMesa[count].precio);
+
+    count++;
 
   });
 
