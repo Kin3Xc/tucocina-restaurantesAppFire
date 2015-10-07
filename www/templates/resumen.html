@@ -10,6 +10,9 @@
                     <p>Estado del Plato :</p>
                     <p>{{pedido.estado}}</p>
                     <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
+                    <p>
+                      <span  ng-repeat="ingredientes in pedido.ingredientes "> {{ingredientes}}</span>
+                    </p>
                 </a>
             </div>
         </div>

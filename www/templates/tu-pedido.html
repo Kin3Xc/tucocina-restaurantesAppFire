@@ -1,20 +1,24 @@
 <ion-view view-title="Pedido mesa {{mesa}}" left-buttons="leftButtons" right-buttons="rightButtons">
 
  <ion-content class="content-home">
-
- <div class="row">
- 	<div class="col col-100">
- 		<div class="panel" ng-repeat="pedido in pedidosMesa">
-			<div>
-				<h2>Plato</h2>
-				<p>Nombre: {{pedido.plato}}</p>
-				<p>Estado: {{pedido.estado}}</p>
-				<p>Valor: {{pedido.precio}}</p>
-				<br>
-			</div>
- 		</div>
- 	</div>
+ <div class="row columna panel">
+     <div class="col col-100 platos-list">
+         <div class="list contienePlatos" ng-repeat="pedido in pedidosMesa">
+             <a class="item item-thumbnail-left soloRadius">
+                 <img style="width:150px" ng-src="http://tucocinavirtual.com/test/uploads/{{ pedido.imagen }}">
+                 <h2>{{pedido.plato}}</h2>
+                 <p>Estado del Plato :</p>
+                 <p>{{pedido.estado}}</p>
+                 <p class="plato-precio">{{pedido.precio | currency : "$" : 0}}</p>
+                 <p>
+                   <span  ng-repeat="ingredientes in pedido.ingredientes "> {{ingredientes}}</span>
+                 </p>
+             </a>
+         </div>
+         <div class="total">
+      			<h1>TOTAL: {{total}}</h1>
+      		</div>
+     </div>
  </div>
-
 </ion-content>
 </ion-view>
