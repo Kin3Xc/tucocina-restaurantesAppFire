@@ -1061,6 +1061,8 @@ app.controller('promoSeleccionadaCtrl', function($scope, $location, localStorage
 // controlador para traer el pedido actual de una mesa del restaurante
 app.controller('TuPedidoCtrl', function($scope, localStorageService){
 
+  $scope.total = 0;
+
   //regresa los pedidos de la mesa actual mesa
   var count = 0;
   var mesaActual = [];
@@ -1074,7 +1076,7 @@ app.controller('TuPedidoCtrl', function($scope, localStorageService){
     // mesaActual[count].$id = mesa.key();
     $scope.pedidosMesa = mesaActual.filter(Boolean);
 
-    $scope.total += parseInt($scope.pedidosMesa[count].precio);
+    $scope.total = $scope.total + parseInt($scope.pedidosMesa[count].precio);
 
     count++;
 
